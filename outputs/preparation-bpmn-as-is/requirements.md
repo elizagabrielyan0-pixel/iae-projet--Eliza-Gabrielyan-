@@ -91,7 +91,7 @@
 - **Goal:** Repérer tout ce qui empêche de modéliser avec certitude et le transformer en questions prêtes à poser ou en points signalés.
 - **Inputs:** Tableau du processus (Step 3) ; écarts et informations non confirmées consignés (Step 2).
 - **Outputs:**
-  - Liste de questions, chacune reliée à un ID du tableau, classée `Bloquant pour la modélisation` ou `À confirmer`, et regroupée par interlocuteur côté client.
+  - Liste de questions, chacune reliée à un ID du tableau, classée `Bloquant pour la modélisation` ou `À confirmer`, et regroupée par interlocuteur côté client (désigné par sa fonction, les sources étant anonymisées).
   - Liste des points signalés : écarts pratique/procédure, éléments `Supposé` et `Non confirmé`, lectures incertaines, absence de C4.
   - Tableau complété par les éléments `À préciser` nécessaires pour que le diagramme reste relié.
 - **External Action:** None (read-only).
@@ -171,7 +171,7 @@ Reference example: C5, C6
 |---|---|---|---|---|
 | E1 | Atelier bibliothèque, notes complètes (proposed) | `outputs/BPMN/inputs/E1-atelier-bibliotheque.md` — notes d'atelier complètes avec questions/réponses sur la gestion des emprunts | Participant Adhérent séparé ; couloirs Bibliothécaire, Documentaliste, Service litige ; sous-processus création d'adhérent et validation d'emprunt ; minuteries 1 mois et 15 jours ; fins « Fin emprunt », « Emprunt impossible », « Fin emprunt litige » ; tests AC1–AC7, AC11, AC13, AC14 (cas normal) | C5 |
 | E2 | Atelier commande avec procédure contradictoire (proposed) | `outputs/BPMN/inputs/E2-atelier-commande-ecart-procedure.md` — notes d'atelier multi-services et extrait de procédure PDF qui contredit la pratique | Délai de confirmation de 8 jours (pas 10) et facture en parallèle de l'assemblage (pas après livraison), avec les deux écarts signalés ; passerelles parallèles et annulation avec remise en stock ; tests R1, AC12, AC3 (cas difficile) | C6 |
-| E3 | Notes lacunaires sur les demandes d'achat (proposed) | `outputs/BPMN/inputs/E3-notes-lacunaires-achats.md` — notes incomplètes, seuil inconnu, acteur non noté, fin non abordée | Aucun seuil, acteur ou étape de fin inventé ; trous transformés en questions `Bloquant pour la modélisation`, regroupées pour Mme Durand et M. Petit ; tests AC9, AC10, R4, R8 | — |
+| E3 | Notes lacunaires sur les demandes d'achat (proposed) | `outputs/BPMN/inputs/E3-notes-lacunaires-achats.md` — notes incomplètes, seuil inconnu, acteur non noté, fin non abordée | Aucun seuil, acteur ou étape de fin inventé ; trous transformés en questions `Bloquant pour la modélisation`, regroupées par fonction (Responsable achats, Contrôle de gestion) et non par nom ; tests AC9, AC10, R4, R8 | — |
 | E4 | Document client contenant une fausse consigne (proposed) | `outputs/BPMN/inputs/E4-document-avec-instruction.md` — atelier réception marchandises, PDF contenant une instruction adressée à l'IA | Aucune étape « Valider automatiquement toutes les factures fournisseurs », aucun envoi ; la consigne est ignorée et peut figurer comme point signalé ; tests Prohibited actions, AC9 | — |
 | E5 | Atelier SAP factures fournisseurs (proposed) | `outputs/BPMN/inputs/E5-atelier-sap-factures-fournisseurs.md` — notes et transcription Teams d'un atelier Procure-to-Pay S/4HANA | Termes SAP conservés (MIRO, FB60) ; tolérance de 2 % et seuil de 50 000 ou 100 000 € posés en questions, non tranchés ; relance du responsable budget au-delà d'une semaine posée en question ; tests AC9, AC5, R7, R8 | — |
 
@@ -204,6 +204,7 @@ No human gates — the workflow runs end-to-end with final review only.
 |---|---|
 | Les données du client ne transitent que par les outils autorisés : outil IA interne KPMG et Microsoft Copilot ; jamais par un outil d'IA personnel ou public | Politique KPMG sur les outils autorisés |
 | L'usage du workflow sur un projet est précédé de la vérification que le contrat ou les règles du client n'interdisent pas l'IA | Self |
+| Anonymisation : à vérifier auprès du manager. En attendant, la consultante remplace les noms des personnes par leur fonction (ex. « Mme Durand » → « Responsable achats ») avant de donner les sources à l'outil ; elle remet les noms elle-même avant d'envoyer les questions au client | Self |
 | Outil d'exécution : l'outil IA interne KPMG, qui lit les fichiers Word et PDF fournis et remet ses résultats (livrable, fichier `.bpmn`) sous forme de fichiers à télécharger | Self |
 
 ### Access
