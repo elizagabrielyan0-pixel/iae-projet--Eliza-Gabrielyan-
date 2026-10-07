@@ -9,8 +9,8 @@
 |---|---|
 | Business Objective | Réduire le temps de production des BPMN « as-is » et ne plus partir d'une page blanche |
 | Desired Outcome | La consultante part d'un premier jet (tableau, questions, BPMN) qu'elle oriente, améliore et corrige, et se repère plus vite dans le processus du client |
-| Measure | Temps total entre la fin de l'atelier et un BPMN prêt à envoyer (en jours ouvrés) |
-| Baseline | Environ 5 jours ouvrés (une semaine) par BPMN · Estimated (observé sur plusieurs BPMN, non chronométré) |
+| Measure | Temps total entre la fin de l'atelier et un BPMN prêt à envoyer (en jours ouvrés). « Prêt à envoyer » = la consultante a fini de corriger le BPMN dans Camunda et il est prêt pour la relecture interne ; la relecture par le manager et l'attente des réponses du client ne sont pas comptées |
+| Baseline | Environ 5 jours ouvrés (une semaine) par BPMN, comptés jusqu'au même point d'arrivée · Estimated (observé sur plusieurs BPMN, non chronométré) |
 | Target | 3 jours ouvrés par BPMN |
 | Readable When | À définir, dès le premier atelier réel traité avec le workflow |
 
