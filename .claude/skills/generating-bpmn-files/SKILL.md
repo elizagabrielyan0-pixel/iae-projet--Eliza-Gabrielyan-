@@ -19,7 +19,11 @@ Il ne réfléchit pas au processus : il recopie le tableau. Il n'ajoute, ne reti
 Si le tableau manque, s'arrêter et le demander.
 
 ## Étapes
-1. **Lire le tableau** : relever les participants, les couloirs de chaque participant, les éléments et leurs liens (colonne « Élément suivant », plusieurs suivants possibles pour une passerelle).
+1. **Lire le tableau** : relever les participants, les couloirs de chaque participant, les éléments et leurs liens. Façon d'écrire attendue (celle du skill `preparation-bpmn-as-is`) :
+   - « Participant / Couloir » = `Participant interne / Couloir` ;
+   - une ligne de type « Participant externe » = un participant externe (pas un élément à l'intérieur) ;
+   - « Élément suivant » = ID séparés par « ; » ; `Message « Nom » → ID` = un flux de message nommé ; « — » = pas de suivant ;
+   - « Condition » d'une passerelle = `ID : condition ; ID : condition` → nom du flux vers chaque ID.
 
 2. **Construire la partie « modèle »** en suivant `references/squelette.bpmn` :
    - une `collaboration` avec un `participant` par participant du tableau ; le participant interne pointe vers un `process` qui porte un `laneSet` (un `lane` par couloir, avec ses `flowNodeRef`) ; chaque participant externe pointe vers un `process` vide ;
@@ -36,6 +40,7 @@ Si le tableau manque, s'arrêter et le demander.
    | Message reçu / Message envoyé | `intermediateCatchEvent` / `intermediateThrowEvent` + `messageEventDefinition` |
    | Lien (envoi / réception) | `intermediateThrowEvent` / `intermediateCatchEvent` + `linkEventDefinition name="…"` (même nom des deux côtés) |
    | Passerelle exclusive / parallèle / inclusive / basée sur les événements | `exclusiveGateway` / `parallelGateway` / `inclusiveGateway` / `eventBasedGateway` |
+   | Participant externe | `participant` (id `Participant_<ID>`) relié à un `process` vide ; ses flux de message partent de / arrivent sur ce participant |
 
    - les liens dans un même participant sont des `sequenceFlow` ; la condition d'une branche va dans l'attribut `name` du flux (« OUI », « NON », « > 5 000 € ») ;
    - les échanges avec un participant externe sont des `messageFlow` nommés (nom du message), placés dans la `collaboration`, jamais des `sequenceFlow` ;

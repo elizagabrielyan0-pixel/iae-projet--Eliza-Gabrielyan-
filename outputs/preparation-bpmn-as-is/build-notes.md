@@ -14,3 +14,11 @@
 - Étape Test : lancer S1 sur E1 à E5 et ouvrir chaque `.bpmn` produit dans Camunda Modeler (AC13).
 - Outil IA KPMG : vérifier ses capacités (instructions réutilisables, fichiers de référence, création de fichier) puis y recopier S1, S2 et leurs fichiers de référence.
 - Compléter les sections « À COMPLÉTER PAR L'ÉQUIPE » de C4 quand elles sont connues (puis recopier C4 dans `references/`).
+
+## Corrections après relecture (2026-10-07)
+Comparaison du skill avec le design-spec et les requirements ; corrections faites dans S1 (et S2 pour rester d'accord) :
+- Notes d'atelier acceptées en Word, `.md` ou texte collé ; un fichier qui regroupe plusieurs sources (cas des exemples E1 à E5) est découpé en C1 / C2 / C3. Avant, « Word obligatoire » pouvait bloquer les tests.
+- Façon d'écrire le tableau fixée (ID, liste des types BPMN, participants externes, messages, conditions des passerelles), la même dans S1 et S2, pour que le fichier `.bpmn` se génère sans anomalie.
+- Chaque élément « Non confirmé » ou « À préciser » a sa question Qx (le `.bpmn` y renvoie).
+- Relance : ce que devient une question à laquelle le client a répondu.
+- Noms des fichiers et test / usage réel : seuls E1 à E5 sont enregistrés dans le dépôt ; toute autre source n'y est jamais écrite.
