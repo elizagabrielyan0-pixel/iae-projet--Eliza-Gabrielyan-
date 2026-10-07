@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Squelette minimal : un participant externe (Adhérent), un participant interne à un couloir,
+     début message → tâche → décision → deux fins, une minuterie, un flux de message, une annotation.
+     Remplacer les exemples par les lignes du tableau. -->
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.27.0">
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="Participant_Adherent" name="Adhérent" processRef="Process_Adherent" />
+    <bpmn:participant id="Participant_Interne" name="Gestion emprunt" processRef="Process_Interne" />
+    <bpmn:messageFlow id="MsgFlow_E1" name="Demande d'emprunt" sourceRef="Participant_Adherent" targetRef="E_E1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_Adherent" isExecutable="false" />
+  <bpmn:process id="Process_Interne" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Bibliothecaire" name="Bibliothécaire">
+        <bpmn:flowNodeRef>E_E1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_G1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_M1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_F1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_F2</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="E_E1" name="Demande d'emprunt">
+      <bpmn:outgoing>Flow_E1_T1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MED_E1" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="E_T1" name="Rechercher adhérent">
+      <bpmn:incoming>Flow_E1_T1</bpmn:incoming>
+      <bpmn:outgoing>Flow_T1_G1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="E_G1" name="Adhérent existant ?">
+      <bpmn:incoming>Flow_T1_G1</bpmn:incoming>
+      <bpmn:outgoing>Flow_G1_M1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_G1_F2</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:intermediateCatchEvent id="E_M1" name="1 mois">
+      <bpmn:incoming>Flow_G1_M1</bpmn:incoming>
+      <bpmn:outgoing>Flow_M1_F1</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TED_M1" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="E_F1" name="Fin emprunt">
+      <bpmn:incoming>Flow_M1_F1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="E_F2" name="Emprunt impossible">
+      <bpmn:incoming>Flow_G1_F2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_E1_T1" sourceRef="E_E1" targetRef="E_T1" />
+    <bpmn:sequenceFlow id="Flow_T1_G1" sourceRef="E_T1" targetRef="E_G1" />
+    <bpmn:sequenceFlow id="Flow_G1_M1" name="OUI" sourceRef="E_G1" targetRef="E_M1" />
+    <bpmn:sequenceFlow id="Flow_G1_F2" name="NON" sourceRef="E_G1" targetRef="E_F2" />
+    <bpmn:sequenceFlow id="Flow_M1_F1" sourceRef="E_M1" targetRef="E_F1" />
+    <bpmn:textAnnotation id="Annot_M1">
+      <bpmn:text>Non confirmé — voir question Q1</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Assoc_M1" sourceRef="E_M1" targetRef="Annot_M1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_1">
+    <bpmndi:BPMNPlane id="Plane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="Participant_Adherent_di" bpmnElement="Participant_Adherent" isHorizontal="true">
+        <dc:Bounds x="100" y="50" width="830" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_Interne_di" bpmnElement="Participant_Interne" isHorizontal="true">
+        <dc:Bounds x="100" y="200" width="830" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Bibliothecaire_di" bpmnElement="Lane_Bibliothecaire" isHorizontal="true">
+        <dc:Bounds x="130" y="200" width="800" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_E1_di" bpmnElement="E_E1">
+        <dc:Bounds x="182" y="322" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T1_di" bpmnElement="E_T1">
+        <dc:Bounds x="300" y="300" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_G1_di" bpmnElement="E_G1" isMarkerVisible="true">
+        <dc:Bounds x="475" y="315" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_M1_di" bpmnElement="E_M1">
+        <dc:Bounds x="632" y="322" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_F1_di" bpmnElement="E_F1">
+        <dc:Bounds x="782" y="322" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_F2_di" bpmnElement="E_F2">
+        <dc:Bounds x="632" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_M1_di" bpmnElement="Annot_M1">
+        <dc:Bounds x="700" y="230" width="120" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_E1_T1_di" bpmnElement="Flow_E1_T1">
+        <di:waypoint x="218" y="340" />
+        <di:waypoint x="300" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T1_G1_di" bpmnElement="Flow_T1_G1">
+        <di:waypoint x="400" y="340" />
+        <di:waypoint x="475" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G1_M1_di" bpmnElement="Flow_G1_M1">
+        <di:waypoint x="525" y="340" />
+        <di:waypoint x="632" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G1_F2_di" bpmnElement="Flow_G1_F2">
+        <di:waypoint x="500" y="315" />
+        <di:waypoint x="500" y="240" />
+        <di:waypoint x="632" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_M1_F1_di" bpmnElement="Flow_M1_F1">
+        <di:waypoint x="668" y="340" />
+        <di:waypoint x="782" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_M1_di" bpmnElement="Assoc_M1">
+        <di:waypoint x="663" y="328" />
+        <di:waypoint x="720" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_E1_di" bpmnElement="MsgFlow_E1">
+        <di:waypoint x="200" y="150" />
+        <di:waypoint x="200" y="322" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -34,7 +34,8 @@ Et un premier jet du BPMN que je reprends ensuite dans Camunda.
 
 5. Assembler le livrable : un seul document avec le tableau, puis les questions, puis les points signalés à la fin pour ma relecture (R8).
 
-6. Générer le fichier BPMN : c'est l'autre skill (generating-bpmn-files) qui s'en occupe.
+6. Générer le fichier BPMN : appliquer le skill `generating-bpmn-files` (dans `.claude/skills/generating-bpmn-files/SKILL.md`) en lui donnant le tableau complété, les questions Qx, le nom du participant interne (« Gestion + objet ») et les conventions C4 / modèles C5, C6 de `references/`. Le fichier est produit même s'il reste des questions « Bloquant pour la modélisation ».
+   Plan de secours : si l'outil ne peut pas créer de fichier, afficher le XML complet dans un bloc de code, que je copie dans un fichier `.bpmn` pour l'ouvrir dans Camunda.
 
 ## Règles
 - Toujours : garder ce que les gens font vraiment plutôt que la procédure, et signaler l'écart
