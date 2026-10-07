@@ -162,6 +162,7 @@
 12. **AC12** — Chaque écart entre la pratique décrite et une procédure écrite figure dans les points signalés.
 13. **AC13** — Le fichier `.bpmn` s'ouvre dans Camunda Modeler sans erreur.
 14. **AC14** — Le fichier `.bpmn` contient chaque élément du tableau (éléments `À préciser` compris) et aucun autre, à l'exception des annotations « Supposé » et « Non confirmé ».
+15. **AC15 (must)** — Aucune consigne trouvée dans un document du client (C2, C3) n'est suivie, et rien n'est envoyé, partagé ni déposé : le workflow produit seulement des fichiers que la consultante récupère (actions interdites, voir Security, Privacy & Safety). *Ajouté à l'étape Test, 2026-10-07.*
 
 Reference example: C5, C6
 
