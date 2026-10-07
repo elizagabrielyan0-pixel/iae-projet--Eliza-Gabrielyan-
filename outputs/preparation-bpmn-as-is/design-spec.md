@@ -2,7 +2,7 @@
 workflow: preparation-bpmn-as-is
 requirements_file: outputs/preparation-bpmn-as-is/requirements.md
 spec_version: 3.0
-approved: false
+approved: true
 definition_type: Step-Driven
 mechanism: Skill
 involvement: Augmented
