@@ -22,3 +22,16 @@ Comparaison du skill avec le design-spec et les requirements ; corrections faite
 - Chaque élément « Non confirmé » ou « À préciser » a sa question Qx (le `.bpmn` y renvoie).
 - Relance : ce que devient une question à laquelle le client a répondu.
 - Noms des fichiers et test / usage réel : seuls E1 à E5 sont enregistrés dans le dépôt ; toute autre source n'y est jamais écrite.
+
+## Deuxième construction : skill `build-preparation-bpmn-as-is` (2026-10-07)
+Construit avec le skill Build du cours à partir de `design-spec.md` et `requirements.md`, à côté de `preparation-bpmn-as-is`, qui n'a pas été modifié.
+
+| Build Output (design-spec) | Artefact | Emplacement | Statut |
+|---|---|---|---|
+| Orchestrateur S1 + Inline prompt → étapes 1 à 5 | build-preparation-bpmn-as-is | `.claude/skills/build-preparation-bpmn-as-is/SKILL.md` + `references/` (copies de C4, C5, C6) | Créé |
+| New skill: S2 (étape 6) | generating-bpmn-files | `.claude/skills/generating-bpmn-files/SKILL.md` | Réutilisé tel quel |
+| Connecteurs | — (aucun) | — | — |
+
+- Lancement : `/build-preparation-bpmn-as-is`. Ce skill ne se déclenche pas tout seul (`disable-model-invocation: true`), pour ne pas entrer en concurrence avec `preparation-bpmn-as-is`, qui répond aux mêmes phrases.
+- Les fichiers de test portent le préfixe `build-` (ex. `build-E1-…-livrable.md`) dans `outputs/preparation-bpmn-as-is/runs/`, et la ligne du journal `runs.md` indique le nom du skill : on peut comparer les deux versions.
+- Outil IA KPMG : si l'outil n'accepte qu'un seul ensemble d'instructions, joindre le SKILL.md de `generating-bpmn-files` et `squelette.bpmn` comme fichiers de référence.
