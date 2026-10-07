@@ -204,7 +204,7 @@ No human gates — the workflow runs end-to-end with final review only.
 |---|---|
 | Les données du client ne transitent que par les outils autorisés : outil IA interne KPMG et Microsoft Copilot ; jamais par un outil d'IA personnel ou public | Politique KPMG sur les outils autorisés |
 | L'usage du workflow sur un projet est précédé de la vérification que le contrat ou les règles du client n'interdisent pas l'IA | Self |
-| Anonymisation : à vérifier auprès du manager. En attendant, la consultante remplace les noms des personnes par leur fonction (ex. « Mme Durand » → « Responsable achats ») avant de donner les sources à l'outil ; elle remet les noms elle-même avant d'envoyer les questions au client | Self |
+| Anonymisation (règle confirmée par le manager le 2026-10-07) : la consultante remplace les noms des personnes par leur fonction (ex. « Mme Durand » → « Responsable achats ») avant de donner les sources à l'outil ; elle remet les noms elle-même avant d'envoyer les questions au client | Manager (confirmé à l'étape Design) |
 | Outil d'exécution : l'outil IA interne KPMG, qui lit les fichiers Word et PDF fournis et remet ses résultats (livrable, fichier `.bpmn`) sous forme de fichiers à télécharger | Self |
 
 ### Access
