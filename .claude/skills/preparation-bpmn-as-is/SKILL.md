@@ -1,5 +1,5 @@
 ---
-name: mon-preparation-bpmn-as-is
+name: preparation-bpmn-as-is
 description: Après un atelier client, transforme mes notes, les PDF du client et les autres sources en tableau du processus as-is, questions pour le client et premier jet de BPMN pour Camunda (à utiliser aussi quand je relance avec les réponses du client).
 ---
 
