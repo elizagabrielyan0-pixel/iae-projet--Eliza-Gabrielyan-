@@ -19,7 +19,6 @@ Et un premier jet du BPMN que je reprends ensuite dans Camunda.
 - Les autres sources (C3) : transcription Teams, mails, réponses du client si c'est une relance
 - Je précise si c'est un premier passage ou une relance
 - Les conventions (C4) et les deux modèles de référence (C5 bibliothèque, C6 commande) sont déjà fournis avec le skill
-- Colonnes : À COMPLÉTER
 
 ## Étapes
 1. Charger les conventions : lire C4, C5, C6 et appliquer la norme BPMN 2.0. Si C4 et les modèles ne disent pas la même chose, c'est C4 qui compte. Si C4 manque, utiliser la norme + le style des modèles et le noter dans les points signalés.
