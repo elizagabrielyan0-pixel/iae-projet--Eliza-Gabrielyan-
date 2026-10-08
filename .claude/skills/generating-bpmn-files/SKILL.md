@@ -52,6 +52,7 @@ Si le tableau manque, s'arrêter et le demander.
 4. **Annotations** (`textAnnotation` + `association` vers l'élément, dans le `process`) :
    - statut `Supposé` → « Supposé — à confirmer »
    - statut `Non confirmé` → « Non confirmé — voir question Qx » (numéro de la question liée à l'ID ; « voir points signalés » s'il n'y en a pas)
+   - statut `À préciser` → « À préciser — voir question Qx », sauf si le libellé de l'élément commence déjà par « À préciser » (pas de doublon)
    - aucune autre annotation.
 
 5. **Dessiner (partie `bpmndi`)** : une forme `BPMNShape` par participant, couloir, élément et annotation ; une `BPMNEdge` par flux et par association. Règles de mise en page :
