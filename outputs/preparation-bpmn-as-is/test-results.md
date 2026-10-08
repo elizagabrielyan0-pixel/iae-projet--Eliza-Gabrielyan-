@@ -272,18 +272,63 @@ Notation faite le 2026-10-08 par Claude, sans question pendant la notation (cons
 
 *(E1 et E2 seulement : la comparaison porte sur le résultat, pas sur le chemin)*
 
+**E1 contre C5 (modèle bibliothèque)**
+- Différent : fins « Emprunt terminé » et « Emprunt clos en litige » au lieu de « Fin emprunt » et « Fin emprunt litige » ; décision « Adhérent inscrit ? » au lieu de « Adhérent existant ? ». Ce sont les mots des notes du client (R7) ; les écarts sont signalés dans le livrable.
+- En plus : deux fins nommées dans SP1 (« Inscription validée », « Dossier en attente ») là où C5 en a une, et la question bloquante Q1 sur la suite d'un dossier en attente.
+- Manquant : rien d'attendu par le plan de test (Adhérent séparé, 3 couloirs, SP création d'adhérent et validation d'emprunt, minuteries 1 mois et 15 jours, fin « Emprunt impossible » présents).
+
+**E2 contre C6 (modèle commande)**
+- Différent : délai et facture tels que pratiqués (8 jours, facture pendant l'assemblage), comme attendu ; « Préparer ordre de confirmation » (terme du client) au lieu de « Créer ordre de confirmation » ; deux fins « Commande réglée » / « Commande terminée après contentieux » au lieu d'une seule « Commande terminée ».
+- En plus : branche « stock insuffisant, capacité OK » vers une fin « À préciser » (Q6, bloquante) — C6 n'a que « Stock OK ET Capacité OK » et « Capacité KO ».
+- Manquant : couloir « Service appro » et participant « Fournisseurs » (vides dans C6, non repris car la production dit qu'ils n'interviennent pas) ; objets de données des statuts (C4 §8 à compléter) ; lien « Vers fabrication ». Ce que j'enverrais quand même : oui, chaque différence est expliquée dans les points signalés.
+
 ## Not run
 
-- **R9** — aucun scénario de ce tour n'est une relance.
+- **R9** — aucun scénario de ce tour n'est une relance (E1 à E5).
+- **AC13** — E1 à E5 : à vérifier dans Camunda. Contrôle fait à la place : lecture par bpmn-moddle 9 (0 avertissement sur les 5 fichiers), chaque élément du modèle a sa forme ou son trait dans le dessin, chaque ligne du tableau principal se retrouve une fois dans le fichier avec le même libellé. L'ouverture dans Camunda Modeler reste à faire par moi.
 
 ## Environment
 
 Claude Code, aucun connecteur : le workflow lit et écrit uniquement des fichiers. AC13 (ouverture dans Camunda Modeler) demande que la consultante ouvre elle-même chaque `.bpmn` produit.
 
+Lancements du 2026-10-08 : E2, E3, E4 et E5 lancés chacun par un agent neuf, l'un après l'autre, avec le même message (premier passage, données de test) ; E1 = lancement du 2026-10-08 déjà dans `runs/`. Chaque agent a suivi le skill jusqu'à l'étape 6 et a fait son propre commit.
+
 ## Issues identified
+
+| Scénario | Ligne | Building block | Ce qu'il faut changer |
+|---|---|---|---|
+| E5 | AC1 | orchestrator (`preparation-bpmn-as-is`, étape 3) | Dire qu'un rôle interne à l'entreprise (ex. responsable budget, DAF) est un couloir du participant interne, même quand on lui écrit par mail ; seul un acteur extérieur à l'entreprise (client, fournisseur, transporteur) est un participant externe. Voir correction C1. |
 
 ## Accepted misses
 
+*(aucun pour l'instant — à décider par moi, voir « À vérifier par moi »)*
+
 ## Verdict
 
+**Provisoire — pas encore prêt** : 144 lignes met sur 145 lignes notables pour les 5 scénarios (AC13 et R9 non notées). Aucune ligne **(must)** ratée : AC3, AC9 et AC15 sont met sur E1 à E5, donc aucun scénario n'échoue. Il reste : (1) E5 AC1 ratée, à corriger (correction C1) ou à accepter ; (2) AC13 à vérifier dans Camunda pour les 5 fichiers. Le tour reste `in-progress` : je le clos (`round_status: complete`, `readiness`, compteurs) après ma vérification dans Camunda et ma décision sur E5 AC1.
+
 ## Test records created
+
+Aucun enregistrement dans un système extérieur. Fichiers créés dans le dépôt : `runs/E2-…`, `runs/E3-…`, `runs/E4-…`, `runs/E5-…` (livrable + `.bpmn` pour chacun) et 4 lignes dans `runs.md`. Rien à nettoyer.
+
+## À vérifier par moi
+
+1. **AC13, E1 à E5** — ouvrir les 5 fichiers `.bpmn` de `runs/` (E1 du 2026-10-08) dans Camunda Modeler : pas d'erreur à l'ouverture, puis réaligner les flux de message qui partent des sous-processus repliés (E1 SP1, E2 SP2, E4 SP1, E5 SP1 / SP2 : les deux flux de SP2 vers le Responsable budget se superposent).
+2. **E5 AC1** — le Responsable budget en participant externe : je l'ai noté raté. Est-ce que je l'accepte (pour montrer les échanges par mail) ou est-ce que je corrige le skill (C1) ?
+3. **E5 [AP1]** — la fin « À préciser — voir Q7 » (question bloquante) est cachée dans le détail de SP2 : elle n'apparaît pas dans le `.bpmn`. Acceptable pour un premier jet ?
+4. **E3 et E5, éléments `À préciser` sans annotation** — [G1], [T4], [SP1], [G5] (E3) et [G5] (E5) ont le statut `À préciser` mais un libellé normal : rien ne les marque dans le `.bpmn` (seuls `Supposé` et `Non confirmé` reçoivent une annotation). Voir correction C2.
+5. **E3, Q10 et Q11** — le délai de traitement et le seuil de validation sont posés en « À confirmer », pas en « Bloquant pour la modélisation » comme l'attendait le plan de test. Je les ai notés met (le diagramme tient sans le chiffre). D'accord ?
+6. **E3, ordre des étapes** — refus [G1] placé juste après la vérification des achats, validation au-dessus du seuil ensuite, puis choix du fournisseur : ordre des notes, statut `À préciser` et Q3 bloquante. Je l'ai noté met en AC9.
+7. **E2, [G1]** — la 3e branche « Stock insuffisant et capacité OK » vers une fin `À préciser` : c'est un cas manquant posé en question (Q6), pas une condition inventée. Je l'ai noté met en AC9.
+8. **E1, noms des fins** — « Emprunt terminé » / « Emprunt clos en litige » au lieu de « Fin emprunt » / « Fin emprunt litige » du plan de test : je les ai acceptés car ce sont les mots du client.
+9. **E4** — le livrable dit que « Gestion litige » est repris du modèle C6 ; il vient en fait de C5 (C6 a « Gestion contentieux »). Simple erreur de référence dans un point signalé.
+10. **E5, [G3]** — « Écart au-delà de la tolérance ? » est `Confirmé` alors que la valeur de la tolérance (2 %) a été dite avec un doute ; la valeur est en Q1. Faut-il plutôt `Non confirmé` ?
+11. **E5, [M1] « Mardi et jeudi »** — un calendrier modélisé en minuterie : à garder ainsi dans Camunda ?
+12. **Colonne « Participant / Couloir » des participants externes** — « Adhérent » / « Client » en E1 et E2, « — » en E4 et E5. Sans effet sur le `.bpmn`, mais pas uniforme. Voir correction C3.
+
+## Corrections proposées pour le skill (non appliquées pendant ce tour)
+
+- **C1 (E5 AC1)** — Étape 3, règle des participants : ajouter « Un rôle ou un service de l'entreprise (responsable budget, DAF, accueil…) est toujours un couloir du participant interne, même quand les échanges se font par mail ; seul un acteur extérieur à l'entreprise (client, adhérent, fournisseur, transporteur) est un participant externe. »
+- **C2 (À vérifier 3 et 4)** — Étape 4 : « Un élément `À préciser` garde le libellé "À préciser — voir question Qx" s'il s'agit d'un trou ; s'il porte un vrai libellé, ajouter " — voir Qx" au libellé ou le noter pour une annotation dans le `.bpmn`. » Et règle des sous-processus : « Une question bloquante qui porte sur le détail d'un sous-processus est aussi signalée sur la ligne SPx du tableau principal (statut `À préciser`), pour qu'elle reste visible dans le `.bpmn`. » (Ou, dans `generating-bpmn-files`, annoter aussi le statut `À préciser`.)
+- **C3 (À vérifier 12)** — Étape 3, « Participant externe » : préciser « colonne Participant / Couloir = son nom (comme le libellé) ».
+- **C4 (À vérifier 5)** — Étape 4 : dire quand un seuil ou un délai manquant est « Bloquant pour la modélisation » (par ex. : « bloquant seulement si le diagramme ne peut pas être dessiné sans lui ; sinon À confirmer »), pour que le plan de test et le skill disent la même chose — ou corriger la ligne E3 du plan de test.
