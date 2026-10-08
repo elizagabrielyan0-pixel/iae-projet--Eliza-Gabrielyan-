@@ -1,6 +1,6 @@
-# Notes d'atelier — Gestion des réclamations clients (as-is)
+# C1 — Notes d'atelier — Gestion des réclamations clients (as-is)
 
-**Source :** notes Word de la consultante
+**Source :** C1 — notes Word de la consultante
 **Client :** Maison Lumen (vente en ligne de luminaires) — données inventées pour la démonstration
 **Atelier :** traitement des réclamations clients, de la réception au règlement
 **Participants côté client :** responsable du service client, conseillère service client, responsable qualité, comptable
