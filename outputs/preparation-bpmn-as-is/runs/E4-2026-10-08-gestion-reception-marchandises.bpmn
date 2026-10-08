@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.27.0">
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="Participant_P1" name="Transporteur" processRef="Process_P1" />
+    <bpmn:participant id="Participant_P2" name="Fournisseur" processRef="Process_P2" />
+    <bpmn:participant id="Participant_Interne" name="Gestion réception marchandises" processRef="Process_Interne" />
+    <bpmn:messageFlow id="MsgFlow_P1_EV1" name="Livraison marchandise" sourceRef="Participant_P1" targetRef="E_EV1" />
+    <bpmn:messageFlow id="MsgFlow_SP1_P2" name="Mail écart" sourceRef="E_SP1" targetRef="Participant_P2" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_P1" isExecutable="false" />
+  <bpmn:process id="Process_P2" isExecutable="false" />
+  <bpmn:process id="Process_Interne" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Magasinier" name="Magasinier">
+        <bpmn:flowNodeRef>E_EV1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_G1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_F1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T5</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Gestionnaire_des_stocks" name="Gestionnaire des stocks">
+        <bpmn:flowNodeRef>E_SP1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_AP1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="E_EV1" name="Livraison marchandise">
+      <bpmn:outgoing>Flow_EV1_T1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MED_EV1" />
+    </bpmn:startEvent>
+    <bpmn:manualTask id="E_T1" name="Contrôler bon de livraison">
+      <bpmn:incoming>Flow_EV1_T1</bpmn:incoming>
+      <bpmn:outgoing>Flow_T1_G1</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:exclusiveGateway id="E_G1" name="Livraison conforme ?">
+      <bpmn:incoming>Flow_T1_G1</bpmn:incoming>
+      <bpmn:outgoing>Flow_G1_T2</bpmn:outgoing>
+      <bpmn:outgoing>Flow_G1_T4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="E_T2" name="Enregistrer entrée en stock">
+      <bpmn:incoming>Flow_G1_T2</bpmn:incoming>
+      <bpmn:outgoing>Flow_T2_T3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:manualTask id="E_T3" name="Ranger marchandise">
+      <bpmn:incoming>Flow_T2_T3</bpmn:incoming>
+      <bpmn:outgoing>Flow_T3_F1</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:endEvent id="E_F1" name="Marchandise rangée">
+      <bpmn:incoming>Flow_T3_F1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:manualTask id="E_T4" name="Refuser partie non conforme">
+      <bpmn:incoming>Flow_G1_T4</bpmn:incoming>
+      <bpmn:outgoing>Flow_T4_T5</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="E_T5" name="Signaler écart au gestionnaire des stocks">
+      <bpmn:incoming>Flow_T4_T5</bpmn:incoming>
+      <bpmn:outgoing>Flow_T5_SP1</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:subProcess id="E_SP1" name="Gestion litige">
+      <bpmn:incoming>Flow_T5_SP1</bpmn:incoming>
+      <bpmn:outgoing>Flow_SP1_AP1</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:endEvent id="E_AP1" name="À préciser — voir question Q2">
+      <bpmn:incoming>Flow_SP1_AP1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_EV1_T1" sourceRef="E_EV1" targetRef="E_T1" />
+    <bpmn:sequenceFlow id="Flow_T1_G1" sourceRef="E_T1" targetRef="E_G1" />
+    <bpmn:sequenceFlow id="Flow_G1_T2" name="OUI" sourceRef="E_G1" targetRef="E_T2" />
+    <bpmn:sequenceFlow id="Flow_G1_T4" name="NON" sourceRef="E_G1" targetRef="E_T4" />
+    <bpmn:sequenceFlow id="Flow_T2_T3" sourceRef="E_T2" targetRef="E_T3" />
+    <bpmn:sequenceFlow id="Flow_T3_F1" sourceRef="E_T3" targetRef="E_F1" />
+    <bpmn:sequenceFlow id="Flow_T4_T5" sourceRef="E_T4" targetRef="E_T5" />
+    <bpmn:sequenceFlow id="Flow_T5_SP1" sourceRef="E_T5" targetRef="E_SP1" />
+    <bpmn:sequenceFlow id="Flow_SP1_AP1" sourceRef="E_SP1" targetRef="E_AP1" />
+    <bpmn:textAnnotation id="Annot_T5">
+      <bpmn:text>Non confirmé — voir question Q4</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Assoc_T5" sourceRef="E_T5" targetRef="Annot_T5" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_1">
+    <bpmndi:BPMNPlane id="Plane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="Participant_P1_di" bpmnElement="Participant_P1" isHorizontal="true">
+        <dc:Bounds x="100" y="50" width="1100" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_P2_di" bpmnElement="Participant_P2" isHorizontal="true">
+        <dc:Bounds x="100" y="200" width="1100" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_Interne_di" bpmnElement="Participant_Interne" isHorizontal="true">
+        <dc:Bounds x="100" y="350" width="1100" height="450" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Magasinier_di" bpmnElement="Lane_Magasinier" isHorizontal="true">
+        <dc:Bounds x="130" y="350" width="1070" height="300" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Gestionnaire_des_stocks_di" bpmnElement="Lane_Gestionnaire_des_stocks" isHorizontal="true">
+        <dc:Bounds x="130" y="650" width="1070" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_EV1_di" bpmnElement="E_EV1">
+        <dc:Bounds x="182" y="562" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T1_di" bpmnElement="E_T1">
+        <dc:Bounds x="300" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_G1_di" bpmnElement="E_G1" isMarkerVisible="true">
+        <dc:Bounds x="475" y="555" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T2_di" bpmnElement="E_T2">
+        <dc:Bounds x="600" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T3_di" bpmnElement="E_T3">
+        <dc:Bounds x="750" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_F1_di" bpmnElement="E_F1">
+        <dc:Bounds x="932" y="562" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T4_di" bpmnElement="E_T4">
+        <dc:Bounds x="600" y="430" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T5_di" bpmnElement="E_T5">
+        <dc:Bounds x="750" y="430" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_SP1_di" bpmnElement="E_SP1" isExpanded="false">
+        <dc:Bounds x="900" y="685" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_AP1_di" bpmnElement="E_AP1">
+        <dc:Bounds x="1082" y="707" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_T5_di" bpmnElement="Annot_T5">
+        <dc:Bounds x="740" y="365" width="120" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_EV1_T1_di" bpmnElement="Flow_EV1_T1">
+        <di:waypoint x="218" y="580" />
+        <di:waypoint x="300" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T1_G1_di" bpmnElement="Flow_T1_G1">
+        <di:waypoint x="400" y="580" />
+        <di:waypoint x="475" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G1_T2_di" bpmnElement="Flow_G1_T2">
+        <di:waypoint x="525" y="580" />
+        <di:waypoint x="600" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G1_T4_di" bpmnElement="Flow_G1_T4">
+        <di:waypoint x="500" y="555" />
+        <di:waypoint x="500" y="470" />
+        <di:waypoint x="600" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T2_T3_di" bpmnElement="Flow_T2_T3">
+        <di:waypoint x="700" y="580" />
+        <di:waypoint x="750" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T3_F1_di" bpmnElement="Flow_T3_F1">
+        <di:waypoint x="850" y="580" />
+        <di:waypoint x="932" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T4_T5_di" bpmnElement="Flow_T4_T5">
+        <di:waypoint x="700" y="470" />
+        <di:waypoint x="750" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T5_SP1_di" bpmnElement="Flow_T5_SP1">
+        <di:waypoint x="850" y="470" />
+        <di:waypoint x="875" y="470" />
+        <di:waypoint x="875" y="725" />
+        <di:waypoint x="900" y="725" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_SP1_AP1_di" bpmnElement="Flow_SP1_AP1">
+        <di:waypoint x="1000" y="725" />
+        <di:waypoint x="1082" y="725" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_T5_di" bpmnElement="Assoc_T5">
+        <di:waypoint x="800" y="430" />
+        <di:waypoint x="800" y="415" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_P1_EV1_di" bpmnElement="MsgFlow_P1_EV1">
+        <di:waypoint x="200" y="150" />
+        <di:waypoint x="200" y="562" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_SP1_P2_di" bpmnElement="MsgFlow_SP1_P2">
+        <di:waypoint x="985" y="685" />
+        <di:waypoint x="985" y="300" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
