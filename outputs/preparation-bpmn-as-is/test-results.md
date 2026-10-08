@@ -297,7 +297,7 @@ Lancements du 2026-10-08 : E2, E3, E4 et E5 lancés chacun par un agent neuf, l'
 
 | Scénario | Ligne | Building block | Ce qu'il faut changer |
 |---|---|---|---|
-| E5 | AC1 | orchestrator (`preparation-bpmn-as-is`, étape 3) | Dire qu'un rôle interne à l'entreprise (ex. responsable budget, DAF) est un couloir du participant interne, même quand on lui écrit par mail ; seul un acteur extérieur à l'entreprise (client, fournisseur, transporteur) est un participant externe. Voir correction C1. |
+| E5 | AC1 | orchestrator (`preparation-bpmn-as-is`, étape 3) — correction C1 appliquée le 2026-10-08 | Dire qu'un rôle interne à l'entreprise (ex. responsable budget, DAF) est un couloir du participant interne, même quand on lui écrit par mail ; seul un acteur extérieur à l'entreprise (client, fournisseur, transporteur) est un participant externe. Voir correction C1. |
 
 ## Accepted misses
 
@@ -326,7 +326,10 @@ Aucun enregistrement dans un système extérieur. Fichiers créés dans le dép�
 11. **E5, [M1] « Mardi et jeudi »** — un calendrier modélisé en minuterie : à garder ainsi dans Camunda ?
 12. **Colonne « Participant / Couloir » des participants externes** — « Adhérent » / « Client » en E1 et E2, « — » en E4 et E5. Sans effet sur le `.bpmn`, mais pas uniforme. Voir correction C3.
 
-## Corrections proposées pour le skill (non appliquées pendant ce tour)
+## Corrections proposées pour le skill
+
+**Appliquées le 2026-10-08, après la notation, à ma demande** : C1, C2, C3 et C4 dans `.claude/skills/preparation-bpmn-as-is/SKILL.md` ; C2 aussi dans `.claude/skills/generating-bpmn-files/SKILL.md` (annotation « À préciser — voir question Qx »). En plus : une décision dont le seuil ou la tolérance a été dit avec un doute passe en `Non confirmé` (point 10 de « À vérifier par moi »). Les résultats de ce tour portent sur la version d'avant : il faut relancer E1 à E5 (tour 2) pour vérifier les corrections.
+
 
 - **C1 (E5 AC1)** — Étape 3, règle des participants : ajouter « Un rôle ou un service de l'entreprise (responsable budget, DAF, accueil…) est toujours un couloir du participant interne, même quand les échanges se font par mail ; seul un acteur extérieur à l'entreprise (client, adhérent, fournisseur, transporteur) est un participant externe. »
 - **C2 (À vérifier 3 et 4)** — Étape 4 : « Un élément `À préciser` garde le libellé "À préciser — voir question Qx" s'il s'agit d'un trou ; s'il porte un vrai libellé, ajouter " — voir Qx" au libellé ou le noter pour une annotation dans le `.bpmn`. » Et règle des sous-processus : « Une question bloquante qui porte sur le détail d'un sous-processus est aussi signalée sur la ligne SPx du tableau principal (statut `À préciser`), pour qu'elle reste visible dans le `.bpmn`. » (Ou, dans `generating-bpmn-files`, annoter aussi le statut `À préciser`.)
