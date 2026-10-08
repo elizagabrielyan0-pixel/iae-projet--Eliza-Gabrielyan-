@@ -328,7 +328,7 @@ Aucun enregistrement dans un système extérieur. Fichiers créés dans le dép�
 
 ## Corrections proposées pour le skill
 
-**Appliquées le 2026-10-08, après la notation, à ma demande** : C1, C2, C3 et C4 dans `.claude/skills/preparation-bpmn-as-is/SKILL.md` ; C2 aussi dans `.claude/skills/generating-bpmn-files/SKILL.md` (annotation « À préciser — voir question Qx »). En plus : une décision dont le seuil ou la tolérance a été dit avec un doute passe en `Non confirmé` (point 10 de « À vérifier par moi »). Les résultats de ce tour portent sur la version d'avant : il faut relancer E1 à E5 (tour 2) pour vérifier les corrections.
+**Appliquées le 2026-10-08, après la notation, à ma demande** : C1, C2, C3 et C4 dans `.claude/skills/preparation-bpmn-as-is/SKILL.md` ; C2 aussi dans `.claude/skills/generating-bpmn-files/SKILL.md` (annotation « À préciser — voir question Qx »). En plus : une décision dont le seuil ou la tolérance a été dit avec un doute passe en `Non confirmé` (point 10 de « À vérifier par moi »). Le même jour, `generating-bpmn-files` a reçu un programme fixe qui écrit et vérifie le `.bpmn` (voir `build-notes.md`) : relu sur les livrables du tour 1, il ne trouve plus aucun flux qui traverse une forme ni aucun trait superposé, et bpmn-js ouvre les 5 fichiers sans avertissement. Les résultats de ce tour portent sur la version d'avant : il faut relancer E1 à E5 (tour 2) pour vérifier les corrections.
 
 
 - **C1 (E5 AC1)** — Étape 3, règle des participants : ajouter « Un rôle ou un service de l'entreprise (responsable budget, DAF, accueil…) est toujours un couloir du participant interne, même quand les échanges se font par mail ; seul un acteur extérieur à l'entreprise (client, adhérent, fournisseur, transporteur) est un participant externe. »
