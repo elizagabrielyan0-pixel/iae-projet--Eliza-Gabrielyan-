@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.27.0">
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="Participant_P1" name="Fournisseur" processRef="Process_P1" />
+    <bpmn:participant id="Participant_Interne" name="Gestion facture fournisseur" processRef="Process_Interne" />
+    <bpmn:messageFlow id="MsgFlow_1_P1_EV1" name="Facture par e-mail" sourceRef="Participant_P1" targetRef="E_EV1" />
+    <bpmn:messageFlow id="MsgFlow_2_P1_EV2" name="Facture par courrier" sourceRef="Participant_P1" targetRef="E_EV2" />
+    <bpmn:messageFlow id="MsgFlow_3_P1_SP1" name="Avoir" sourceRef="Participant_P1" targetRef="E_SP1" />
+    <bpmn:messageFlow id="MsgFlow_4_SP1_P1" name="Demande de vérification" sourceRef="E_SP1" targetRef="Participant_P1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_P1" isExecutable="false" />
+  <bpmn:process id="Process_Interne" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Comptable_fournisseurs_1" name="Comptable fournisseurs">
+        <bpmn:flowNodeRef>E_EV1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_G1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_G2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_G3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T7</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_G4</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Accueil_2" name="Accueil">
+        <bpmn:flowNodeRef>E_EV2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Acheteur_3" name="Acheteur">
+        <bpmn:flowNodeRef>E_SP1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Responsable_budget_4" name="Responsable budget">
+        <bpmn:flowNodeRef>E_SP2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Tresorerie_5" name="Trésorerie">
+        <bpmn:flowNodeRef>E_EV3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T8</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_G5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T11</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_G6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_F1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_DAF_6" name="DAF">
+        <bpmn:flowNodeRef>E_T10</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="E_EV1" name="Facture reçue par e-mail">
+      <bpmn:outgoing>Flow_EV1_G1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MED_EV1" />
+    </bpmn:startEvent>
+    <bpmn:startEvent id="E_EV2" name="Facture reçue par courrier">
+      <bpmn:outgoing>Flow_EV2_T1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MED_EV2" />
+    </bpmn:startEvent>
+    <bpmn:manualTask id="E_T1" name="Scanner facture papier">
+      <bpmn:incoming>Flow_EV2_T1</bpmn:incoming>
+      <bpmn:outgoing>Flow_T1_T2</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:userTask id="E_T2" name="Déposer facture scannée dans boîte factures@">
+      <bpmn:incoming>Flow_T1_T2</bpmn:incoming>
+      <bpmn:outgoing>Flow_T2_G1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="E_G1">
+      <bpmn:incoming>Flow_EV1_G1</bpmn:incoming>
+      <bpmn:incoming>Flow_T2_G1</bpmn:incoming>
+      <bpmn:outgoing>Flow_G1_T3</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="E_T3" name="Rechercher commande d'achat SAP associée">
+      <bpmn:incoming>Flow_G1_T3</bpmn:incoming>
+      <bpmn:outgoing>Flow_T3_G2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="E_G2" name="Commande d'achat associée ?">
+      <bpmn:incoming>Flow_T3_G2</bpmn:incoming>
+      <bpmn:outgoing>Flow_G2_T4</bpmn:outgoing>
+      <bpmn:outgoing>Flow_G2_T7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="E_T4" name="Saisir facture dans MIRO avec rapprochement commande et entrée de marchandises">
+      <bpmn:incoming>Flow_G2_T4</bpmn:incoming>
+      <bpmn:outgoing>Flow_T4_T5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="E_T5" name="Contrôler écarts quantités et prix">
+      <bpmn:incoming>Flow_T4_T5</bpmn:incoming>
+      <bpmn:outgoing>Flow_T5_G3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="E_G3" name="Écart au-delà de la tolérance ?">
+      <bpmn:incoming>Flow_T5_G3</bpmn:incoming>
+      <bpmn:outgoing>Flow_G3_T6</bpmn:outgoing>
+      <bpmn:outgoing>Flow_G3_G4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="E_T6" name="Bloquer facture au paiement">
+      <bpmn:incoming>Flow_G3_T6</bpmn:incoming>
+      <bpmn:outgoing>Flow_T6_SP1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:subProcess id="E_SP1" name="Gestion écart facture">
+      <bpmn:incoming>Flow_T6_SP1</bpmn:incoming>
+      <bpmn:outgoing>Flow_SP1_G4</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:userTask id="E_T7" name="Saisir facture dans FB60">
+      <bpmn:incoming>Flow_G2_T7</bpmn:incoming>
+      <bpmn:outgoing>Flow_T7_SP2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:subProcess id="E_SP2" name="Validation facture sans commande">
+      <bpmn:incoming>Flow_T7_SP2</bpmn:incoming>
+      <bpmn:outgoing>Flow_SP2_G4</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:exclusiveGateway id="E_G4">
+      <bpmn:incoming>Flow_G3_G4</bpmn:incoming>
+      <bpmn:incoming>Flow_SP1_G4</bpmn:incoming>
+      <bpmn:incoming>Flow_SP2_G4</bpmn:incoming>
+      <bpmn:outgoing>Flow_G4_EV3</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:intermediateCatchEvent id="E_EV3" name="Mardi et jeudi">
+      <bpmn:incoming>Flow_G4_EV3</bpmn:incoming>
+      <bpmn:outgoing>Flow_EV3_T8</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TED_EV3" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:userTask id="E_T8" name="Lancer proposition de paiement">
+      <bpmn:incoming>Flow_EV3_T8</bpmn:incoming>
+      <bpmn:outgoing>Flow_T8_T9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="E_T9" name="Contrôler proposition de paiement">
+      <bpmn:incoming>Flow_T8_T9</bpmn:incoming>
+      <bpmn:outgoing>Flow_T9_G5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="E_G5" name="Montant au-dessus du seuil DAF ?">
+      <bpmn:incoming>Flow_T9_G5</bpmn:incoming>
+      <bpmn:outgoing>Flow_G5_T10</bpmn:outgoing>
+      <bpmn:outgoing>Flow_G5_T11</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="E_T10" name="Signer virement">
+      <bpmn:incoming>Flow_G5_T10</bpmn:incoming>
+      <bpmn:outgoing>Flow_T10_G6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="E_T11" name="Lancer paiement par virement">
+      <bpmn:incoming>Flow_G5_T11</bpmn:incoming>
+      <bpmn:outgoing>Flow_T11_G6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="E_G6">
+      <bpmn:incoming>Flow_T10_G6</bpmn:incoming>
+      <bpmn:incoming>Flow_T11_G6</bpmn:incoming>
+      <bpmn:outgoing>Flow_G6_F1</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="E_F1" name="Facture payée">
+      <bpmn:incoming>Flow_G6_F1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_EV1_G1" sourceRef="E_EV1" targetRef="E_G1" />
+    <bpmn:sequenceFlow id="Flow_EV2_T1" sourceRef="E_EV2" targetRef="E_T1" />
+    <bpmn:sequenceFlow id="Flow_T1_T2" sourceRef="E_T1" targetRef="E_T2" />
+    <bpmn:sequenceFlow id="Flow_T2_G1" sourceRef="E_T2" targetRef="E_G1" />
+    <bpmn:sequenceFlow id="Flow_G1_T3" sourceRef="E_G1" targetRef="E_T3" />
+    <bpmn:sequenceFlow id="Flow_T3_G2" sourceRef="E_T3" targetRef="E_G2" />
+    <bpmn:sequenceFlow id="Flow_G2_T4" name="OUI" sourceRef="E_G2" targetRef="E_T4" />
+    <bpmn:sequenceFlow id="Flow_G2_T7" name="NON" sourceRef="E_G2" targetRef="E_T7" />
+    <bpmn:sequenceFlow id="Flow_T4_T5" sourceRef="E_T4" targetRef="E_T5" />
+    <bpmn:sequenceFlow id="Flow_T5_G3" sourceRef="E_T5" targetRef="E_G3" />
+    <bpmn:sequenceFlow id="Flow_G3_T6" name="OUI" sourceRef="E_G3" targetRef="E_T6" />
+    <bpmn:sequenceFlow id="Flow_G3_G4" name="NON" sourceRef="E_G3" targetRef="E_G4" />
+    <bpmn:sequenceFlow id="Flow_T6_SP1" sourceRef="E_T6" targetRef="E_SP1" />
+    <bpmn:sequenceFlow id="Flow_SP1_G4" sourceRef="E_SP1" targetRef="E_G4" />
+    <bpmn:sequenceFlow id="Flow_T7_SP2" sourceRef="E_T7" targetRef="E_SP2" />
+    <bpmn:sequenceFlow id="Flow_SP2_G4" sourceRef="E_SP2" targetRef="E_G4" />
+    <bpmn:sequenceFlow id="Flow_G4_EV3" sourceRef="E_G4" targetRef="E_EV3" />
+    <bpmn:sequenceFlow id="Flow_EV3_T8" sourceRef="E_EV3" targetRef="E_T8" />
+    <bpmn:sequenceFlow id="Flow_T8_T9" sourceRef="E_T8" targetRef="E_T9" />
+    <bpmn:sequenceFlow id="Flow_T9_G5" sourceRef="E_T9" targetRef="E_G5" />
+    <bpmn:sequenceFlow id="Flow_G5_T10" name="OUI" sourceRef="E_G5" targetRef="E_T10" />
+    <bpmn:sequenceFlow id="Flow_G5_T11" name="NON" sourceRef="E_G5" targetRef="E_T11" />
+    <bpmn:sequenceFlow id="Flow_T10_G6" sourceRef="E_T10" targetRef="E_G6" />
+    <bpmn:sequenceFlow id="Flow_T11_G6" sourceRef="E_T11" targetRef="E_G6" />
+    <bpmn:sequenceFlow id="Flow_G6_F1" sourceRef="E_G6" targetRef="E_F1" />
+    <bpmn:textAnnotation id="Annot_G1"><bpmn:text>Supposé — à confirmer</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_G1" sourceRef="E_G1" targetRef="Annot_G1" />
+    <bpmn:textAnnotation id="Annot_G3"><bpmn:text>Non confirmé — voir question Q10</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_G3" sourceRef="E_G3" targetRef="Annot_G3" />
+    <bpmn:textAnnotation id="Annot_SP1"><bpmn:text>À préciser — voir question Q8</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_SP1" sourceRef="E_SP1" targetRef="Annot_SP1" />
+    <bpmn:textAnnotation id="Annot_SP2"><bpmn:text>À préciser — voir question Q3</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_SP2" sourceRef="E_SP2" targetRef="Annot_SP2" />
+    <bpmn:textAnnotation id="Annot_G4"><bpmn:text>Supposé — à confirmer</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_G4" sourceRef="E_G4" targetRef="Annot_G4" />
+    <bpmn:textAnnotation id="Annot_G5"><bpmn:text>À préciser — voir question Q16</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_G5" sourceRef="E_G5" targetRef="Annot_G5" />
+    <bpmn:textAnnotation id="Annot_G6"><bpmn:text>Supposé — à confirmer</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_G6" sourceRef="E_G6" targetRef="Annot_G6" />
+    <bpmn:textAnnotation id="Annot_F1"><bpmn:text>Supposé — à confirmer</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_F1" sourceRef="E_F1" targetRef="Annot_F1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_1">
+    <bpmndi:BPMNPlane id="Plane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="Participant_P1_di" bpmnElement="Participant_P1" isHorizontal="true"><dc:Bounds x="150" y="60" width="3510" height="100" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_Interne_di" bpmnElement="Participant_Interne" isHorizontal="true"><dc:Bounds x="150" y="210" width="3510" height="1250" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Comptable_fournisseurs_1_di" bpmnElement="Lane_Comptable_fournisseurs_1" isHorizontal="true"><dc:Bounds x="180" y="210" width="3480" height="380" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Accueil_2_di" bpmnElement="Lane_Accueil_2" isHorizontal="true"><dc:Bounds x="180" y="590" width="3480" height="150" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Acheteur_3_di" bpmnElement="Lane_Acheteur_3" isHorizontal="true"><dc:Bounds x="180" y="740" width="3480" height="190" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Responsable_budget_4_di" bpmnElement="Lane_Responsable_budget_4" isHorizontal="true"><dc:Bounds x="180" y="930" width="3480" height="190" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Tresorerie_5_di" bpmnElement="Lane_Tresorerie_5" isHorizontal="true"><dc:Bounds x="180" y="1120" width="3480" height="190" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_DAF_6_di" bpmnElement="Lane_DAF_6" isHorizontal="true"><dc:Bounds x="180" y="1310" width="3480" height="150" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_EV1_di" bpmnElement="E_EV1"><dc:Bounds x="292" y="262" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_EV2_di" bpmnElement="E_EV2"><dc:Bounds x="292" y="647" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T1_di" bpmnElement="E_T1"><dc:Bounds x="440" y="625" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T2_di" bpmnElement="E_T2"><dc:Bounds x="620" y="625" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_G1_di" bpmnElement="E_G1" isMarkerVisible="true"><dc:Bounds x="825" y="255" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T3_di" bpmnElement="E_T3"><dc:Bounds x="980" y="240" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_G2_di" bpmnElement="E_G2" isMarkerVisible="true"><dc:Bounds x="1185" y="255" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T4_di" bpmnElement="E_T4"><dc:Bounds x="1340" y="240" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T5_di" bpmnElement="E_T5"><dc:Bounds x="1520" y="240" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_G3_di" bpmnElement="E_G3" isMarkerVisible="true"><dc:Bounds x="1725" y="255" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T6_di" bpmnElement="E_T6"><dc:Bounds x="1880" y="240" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_SP1_di" bpmnElement="E_SP1" isExpanded="false"><dc:Bounds x="2060" y="770" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T7_di" bpmnElement="E_T7"><dc:Bounds x="1340" y="430" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_SP2_di" bpmnElement="E_SP2" isExpanded="false"><dc:Bounds x="1520" y="960" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_G4_di" bpmnElement="E_G4" isMarkerVisible="true"><dc:Bounds x="2265" y="255" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_EV3_di" bpmnElement="E_EV3"><dc:Bounds x="2452" y="1172" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T8_di" bpmnElement="E_T8"><dc:Bounds x="2600" y="1150" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T9_di" bpmnElement="E_T9"><dc:Bounds x="2780" y="1150" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_G5_di" bpmnElement="E_G5" isMarkerVisible="true"><dc:Bounds x="2985" y="1165" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T10_di" bpmnElement="E_T10"><dc:Bounds x="3140" y="1345" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T11_di" bpmnElement="E_T11"><dc:Bounds x="3140" y="1150" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_G6_di" bpmnElement="E_G6" isMarkerVisible="true"><dc:Bounds x="3345" y="1165" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_F1_di" bpmnElement="E_F1"><dc:Bounds x="3532" y="1172" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_G1_di" bpmnElement="Annot_G1"><dc:Bounds x="790" y="335" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_G3_di" bpmnElement="Annot_G3"><dc:Bounds x="1690" y="335" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_SP1_di" bpmnElement="Annot_SP1"><dc:Bounds x="2050" y="865" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_SP2_di" bpmnElement="Annot_SP2"><dc:Bounds x="1510" y="1055" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_G4_di" bpmnElement="Annot_G4"><dc:Bounds x="2230" y="335" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_G5_di" bpmnElement="Annot_G5"><dc:Bounds x="2950" y="1245" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_G6_di" bpmnElement="Annot_G6"><dc:Bounds x="3310" y="1245" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_F1_di" bpmnElement="Annot_F1"><dc:Bounds x="3490" y="1245" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_EV1_G1_di" bpmnElement="Flow_EV1_G1"><di:waypoint x="328" y="280" /><di:waypoint x="825" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_EV2_T1_di" bpmnElement="Flow_EV2_T1"><di:waypoint x="328" y="665" /><di:waypoint x="440" y="665" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T1_T2_di" bpmnElement="Flow_T1_T2"><di:waypoint x="540" y="665" /><di:waypoint x="620" y="665" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T2_G1_di" bpmnElement="Flow_T2_G1"><di:waypoint x="720" y="665" /><di:waypoint x="760" y="665" /><di:waypoint x="760" y="280" /><di:waypoint x="825" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G1_T3_di" bpmnElement="Flow_G1_T3"><di:waypoint x="875" y="280" /><di:waypoint x="980" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T3_G2_di" bpmnElement="Flow_T3_G2"><di:waypoint x="1080" y="280" /><di:waypoint x="1185" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G2_T4_di" bpmnElement="Flow_G2_T4"><di:waypoint x="1235" y="280" /><di:waypoint x="1340" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G2_T7_di" bpmnElement="Flow_G2_T7"><di:waypoint x="1235" y="280" /><di:waypoint x="1300" y="280" /><di:waypoint x="1300" y="470" /><di:waypoint x="1340" y="470" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T4_T5_di" bpmnElement="Flow_T4_T5"><di:waypoint x="1440" y="280" /><di:waypoint x="1520" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T5_G3_di" bpmnElement="Flow_T5_G3"><di:waypoint x="1620" y="280" /><di:waypoint x="1725" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G3_T6_di" bpmnElement="Flow_G3_T6"><di:waypoint x="1775" y="280" /><di:waypoint x="1880" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G3_G4_di" bpmnElement="Flow_G3_G4"><di:waypoint x="1750" y="255" /><di:waypoint x="1750" y="218" /><di:waypoint x="2200" y="218" /><di:waypoint x="2200" y="280" /><di:waypoint x="2265" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T6_SP1_di" bpmnElement="Flow_T6_SP1"><di:waypoint x="1980" y="280" /><di:waypoint x="2020" y="280" /><di:waypoint x="2020" y="810" /><di:waypoint x="2060" y="810" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_SP1_G4_di" bpmnElement="Flow_SP1_G4"><di:waypoint x="2160" y="810" /><di:waypoint x="2200" y="810" /><di:waypoint x="2200" y="280" /><di:waypoint x="2265" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T7_SP2_di" bpmnElement="Flow_T7_SP2"><di:waypoint x="1440" y="470" /><di:waypoint x="1480" y="470" /><di:waypoint x="1480" y="1000" /><di:waypoint x="1520" y="1000" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_SP2_G4_di" bpmnElement="Flow_SP2_G4"><di:waypoint x="1620" y="1000" /><di:waypoint x="2200" y="1000" /><di:waypoint x="2200" y="280" /><di:waypoint x="2265" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G4_EV3_di" bpmnElement="Flow_G4_EV3"><di:waypoint x="2315" y="280" /><di:waypoint x="2380" y="280" /><di:waypoint x="2380" y="1190" /><di:waypoint x="2452" y="1190" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_EV3_T8_di" bpmnElement="Flow_EV3_T8"><di:waypoint x="2488" y="1190" /><di:waypoint x="2600" y="1190" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T8_T9_di" bpmnElement="Flow_T8_T9"><di:waypoint x="2700" y="1190" /><di:waypoint x="2780" y="1190" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T9_G5_di" bpmnElement="Flow_T9_G5"><di:waypoint x="2880" y="1190" /><di:waypoint x="2985" y="1190" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G5_T10_di" bpmnElement="Flow_G5_T10"><di:waypoint x="3035" y="1190" /><di:waypoint x="3100" y="1190" /><di:waypoint x="3100" y="1385" /><di:waypoint x="3140" y="1385" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G5_T11_di" bpmnElement="Flow_G5_T11"><di:waypoint x="3035" y="1190" /><di:waypoint x="3140" y="1190" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T10_G6_di" bpmnElement="Flow_T10_G6"><di:waypoint x="3240" y="1385" /><di:waypoint x="3280" y="1385" /><di:waypoint x="3280" y="1190" /><di:waypoint x="3345" y="1190" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T11_G6_di" bpmnElement="Flow_T11_G6"><di:waypoint x="3240" y="1190" /><di:waypoint x="3345" y="1190" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G6_F1_di" bpmnElement="Flow_G6_F1"><di:waypoint x="3395" y="1190" /><di:waypoint x="3532" y="1190" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_G1_di" bpmnElement="Assoc_G1"><di:waypoint x="850" y="305" /><di:waypoint x="850" y="335" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_G3_di" bpmnElement="Assoc_G3"><di:waypoint x="1750" y="305" /><di:waypoint x="1750" y="335" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_SP1_di" bpmnElement="Assoc_SP1"><di:waypoint x="2110" y="850" /><di:waypoint x="2110" y="865" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_SP2_di" bpmnElement="Assoc_SP2"><di:waypoint x="1570" y="1040" /><di:waypoint x="1570" y="1055" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_G4_di" bpmnElement="Assoc_G4"><di:waypoint x="2290" y="305" /><di:waypoint x="2290" y="335" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_G5_di" bpmnElement="Assoc_G5"><di:waypoint x="3010" y="1215" /><di:waypoint x="3010" y="1245" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_G6_di" bpmnElement="Assoc_G6"><di:waypoint x="3370" y="1215" /><di:waypoint x="3370" y="1245" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_F1_di" bpmnElement="Assoc_F1"><di:waypoint x="3550" y="1208" /><di:waypoint x="3550" y="1245" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_1_P1_EV1_di" bpmnElement="MsgFlow_1_P1_EV1"><di:waypoint x="310" y="160" /><di:waypoint x="310" y="262" /><bpmndi:BPMNLabel><dc:Bounds x="316" y="197" width="90" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_2_P1_EV2_di" bpmnElement="MsgFlow_2_P1_EV2"><di:waypoint x="400" y="160" /><di:waypoint x="400" y="598" /><di:waypoint x="310" y="598" /><di:waypoint x="310" y="647" /><bpmndi:BPMNLabel><dc:Bounds x="406" y="365" width="90" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_3_P1_SP1_di" bpmnElement="MsgFlow_3_P1_SP1"><di:waypoint x="2110" y="160" /><di:waypoint x="2110" y="770" /><bpmndi:BPMNLabel><dc:Bounds x="2116" y="451" width="90" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_4_SP1_P1_di" bpmnElement="MsgFlow_4_SP1_P1"><di:waypoint x="2090" y="770" /><di:waypoint x="2090" y="160" /><bpmndi:BPMNLabel><dc:Bounds x="1994" y="451" width="90" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="Diagram_E_SP1"><bpmndi:BPMNPlane id="Plane_E_SP1" bpmnElement="E_SP1" /></bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="Diagram_E_SP2"><bpmndi:BPMNPlane id="Plane_E_SP2" bpmnElement="E_SP2" /></bpmndi:BPMNDiagram>
+</bpmn:definitions>
