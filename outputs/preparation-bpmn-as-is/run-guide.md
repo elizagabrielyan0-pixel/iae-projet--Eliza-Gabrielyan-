@@ -3,7 +3,7 @@
 *Fiche d'utilisation, à suivre à chaque atelier. Rédigée le 2026-10-08, après l'étape Test (verdict : prêt, 149 critères réussis sur 150).*
 
 ## Your first real run
-Pas encore de passage réel : au 8 octobre 2026, aucun atelier réel n'est disponible. Tous les passages jusqu'ici ont utilisé les exemples inventés E1 à E5, dans Claude Code.
+Pas encore de passage réel : au 8 octobre 2026, aucun atelier réel n'est disponible. Tous les passages jusqu'ici ont utilisé des données inventées, dans Claude Code : les exemples E1 à E5, puis la simulation « Brumaval Ferronnerie » (`data/simulation-atelier.md`), notée dans le journal comme simulation.
 Le premier passage réel se fera dans **l'outil IA interne KPMG**, après le prochain atelier « as-is ». Ce jour-là, vérifiez trois choses : l'outil lit bien vos notes Word et les PDF du client, il retrouve les fichiers de référence (C4, C5, C6), et il vous remet le livrable et le fichier `.bpmn` à télécharger (ou, à défaut, le XML dans un bloc de code). Si quelque chose bloque alors que les tests étaient bons, c'est presque toujours l'installation dans l'outil (un fichier de référence manquant), pas le skill : on corrige l'installation, on ne reconstruit pas.
 
 ## How to start it
