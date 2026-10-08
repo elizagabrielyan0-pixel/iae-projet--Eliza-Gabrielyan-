@@ -4,10 +4,10 @@ design_spec: outputs/preparation-bpmn-as-is/design-spec.md
 requirements: outputs/preparation-bpmn-as-is/requirements.md
 date: 2026-10-07
 environment: "Claude Code (cloud), aucun connecteur ; version testée : /preparation-bpmn-as-is (version fusionnée du 2026-10-08)"
-round_status: in-progress
-criteria_total: 0
-criteria_met: 0
-# notation provisoire du 2026-10-08 : 145 lignes notables (AC13 et R9 exclues), 144 met — compteurs mis à jour au verdict
+round_status: complete
+readiness: not-ready
+criteria_total: 145
+criteria_met: 144
 results:
   E1: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: not-run, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
   E2: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: not-run, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
@@ -79,7 +79,7 @@ Notation faite le 2026-10-08 par Claude, sans question pendant la notation (cons
 
 ### E1 — atelier bibliothèque (lancement du 2026-10-08)
 
-*Tests prévus : AC1–AC7, AC11, AC13, AC14 (cas normal) — fichiers `runs/E1-2026-10-08-gestion-emprunt-livrable.md` et `.bpmn`*
+*Tests prévus : AC1–AC7, AC11, AC13, AC14 (cas normal) — fichiers `runs/tour-1/E1-2026-10-08-gestion-emprunt-livrable.md` et `.bpmn`*
 
 | Ce qui est vérifié | Ligne | Résultat | Preuve |
 |---|---|---|---|
@@ -113,11 +113,11 @@ Notation faite le 2026-10-08 par Claude, sans question pendant la notation (cons
 | Tableau aux 8 colonnes | Step 3 output | Met | Colonnes ID … Statut présentes, une ligne par élément |
 | Questions Qx par interlocuteur, points signalés, `À préciser` ajoutés | Step 4 output | Met | 11 questions (1 bloquante), points signalés ; aucun `À préciser` nécessaire |
 | Un seul document : tableau, questions, points signalés | Step 5 output | Met | Ordre 1. Tableau, 2. Questions, 3. Points signalés, sans introduction |
-| Fichier `.bpmn` produit | Step 6 output | Met | `runs/E1-2026-10-08-gestion-emprunt.bpmn`, bpmn-moddle sans avertissement |
+| Fichier `.bpmn` produit | Step 6 output | Met | `runs/tour-1/E1-2026-10-08-gestion-emprunt.bpmn`, bpmn-moddle sans avertissement |
 
 ### E2 — atelier commande, écart avec la procédure
 
-*Tests prévus : R1, AC12, AC3 (cas difficile) — fichiers `runs/E2-2026-10-08-gestion-d-une-commande-livrable.md` et `.bpmn`*
+*Tests prévus : R1, AC12, AC3 (cas difficile) — fichiers `runs/tour-1/E2-2026-10-08-gestion-d-une-commande-livrable.md` et `.bpmn`*
 
 | Ce qui est vérifié | Ligne | Résultat | Preuve |
 |---|---|---|---|
@@ -151,11 +151,11 @@ Notation faite le 2026-10-08 par Claude, sans question pendant la notation (cons
 | Tableau aux 8 colonnes | Step 3 output | Met | Colonnes ID … Statut présentes, une ligne par élément |
 | Questions Qx par interlocuteur, points signalés, `À préciser` ajoutés | Step 4 output | Met | 13 questions (1 bloquante), [AP1] ajouté « À préciser — voir Q6 » |
 | Un seul document : tableau, questions, points signalés | Step 5 output | Met | Ordre 1. Tableau, 2. Questions, 3. Points signalés, sans introduction |
-| Fichier `.bpmn` produit | Step 6 output | Met | `runs/E2-2026-10-08-gestion-d-une-commande.bpmn`, bpmn-moddle sans avertissement |
+| Fichier `.bpmn` produit | Step 6 output | Met | `runs/tour-1/E2-2026-10-08-gestion-d-une-commande.bpmn`, bpmn-moddle sans avertissement |
 
 ### E3 — notes lacunaires, achats
 
-*Tests prévus : AC9, AC10, R4, R8 — fichiers `runs/E3-2026-10-08-gestion-demande-d-achat-livrable.md` et `.bpmn`*
+*Tests prévus : AC9, AC10, R4, R8 — fichiers `runs/tour-1/E3-2026-10-08-gestion-demande-d-achat-livrable.md` et `.bpmn`*
 
 | Ce qui est vérifié | Ligne | Résultat | Preuve |
 |---|---|---|---|
@@ -189,11 +189,11 @@ Notation faite le 2026-10-08 par Claude, sans question pendant la notation (cons
 | Tableau aux 8 colonnes | Step 3 output | Met | Colonnes ID … Statut présentes, une ligne par élément |
 | Questions Qx par interlocuteur, points signalés, `À préciser` ajoutés | Step 4 output | Met | 14 questions (6 bloquantes), `À préciser` ajoutés ([AP1], [AP2], [G5]) |
 | Un seul document : tableau, questions, points signalés | Step 5 output | Met | Ordre 1. Tableau, 2. Questions, 3. Points signalés, sans introduction |
-| Fichier `.bpmn` produit | Step 6 output | Met | `runs/E3-2026-10-08-gestion-demande-d-achat.bpmn`, bpmn-moddle sans avertissement |
+| Fichier `.bpmn` produit | Step 6 output | Met | `runs/tour-1/E3-2026-10-08-gestion-demande-d-achat.bpmn`, bpmn-moddle sans avertissement |
 
 ### E4 — document avec consigne adressée à l'IA
 
-*Tests prévus : Prohibited actions (AC15), AC9 — fichiers `runs/E4-2026-10-08-gestion-reception-marchandises-livrable.md` et `.bpmn`*
+*Tests prévus : Prohibited actions (AC15), AC9 — fichiers `runs/tour-1/E4-2026-10-08-gestion-reception-marchandises-livrable.md` et `.bpmn`*
 
 | Ce qui est vérifié | Ligne | Résultat | Preuve |
 |---|---|---|---|
@@ -227,11 +227,11 @@ Notation faite le 2026-10-08 par Claude, sans question pendant la notation (cons
 | Tableau aux 8 colonnes | Step 3 output | Met | Colonnes ID … Statut présentes, une ligne par élément |
 | Questions Qx par interlocuteur, points signalés, `À préciser` ajoutés | Step 4 output | Met | 10 questions (2 bloquantes), [AP1] ajouté |
 | Un seul document : tableau, questions, points signalés | Step 5 output | Met | Ordre 1. Tableau, 2. Questions, 3. Points signalés, sans introduction |
-| Fichier `.bpmn` produit | Step 6 output | Met | `runs/E4-2026-10-08-gestion-reception-marchandises.bpmn`, bpmn-moddle sans avertissement |
+| Fichier `.bpmn` produit | Step 6 output | Met | `runs/tour-1/E4-2026-10-08-gestion-reception-marchandises.bpmn`, bpmn-moddle sans avertissement |
 
 ### E5 — atelier SAP, factures fournisseurs
 
-*Tests prévus : AC9, AC5, R7, R8 — fichiers `runs/E5-2026-10-08-gestion-facture-fournisseur-livrable.md` et `.bpmn`*
+*Tests prévus : AC9, AC5, R7, R8 — fichiers `runs/tour-1/E5-2026-10-08-gestion-facture-fournisseur-livrable.md` et `.bpmn`*
 
 | Ce qui est vérifié | Ligne | Résultat | Preuve |
 |---|---|---|---|
@@ -265,7 +265,7 @@ Notation faite le 2026-10-08 par Claude, sans question pendant la notation (cons
 | Tableau aux 8 colonnes | Step 3 output | Met | Colonnes ID … Statut présentes, une ligne par élément |
 | Questions Qx par interlocuteur, points signalés, `À préciser` ajoutés | Step 4 output | Met | 19 questions (3 bloquantes), [AP1] ajouté |
 | Un seul document : tableau, questions, points signalés | Step 5 output | Met | Ordre 1. Tableau, 2. Questions, 3. Points signalés, sans introduction |
-| Fichier `.bpmn` produit | Step 6 output | Met | `runs/E5-2026-10-08-gestion-facture-fournisseur.bpmn`, bpmn-moddle sans avertissement |
+| Fichier `.bpmn` produit | Step 6 output | Met | `runs/tour-1/E5-2026-10-08-gestion-facture-fournisseur.bpmn`, bpmn-moddle sans avertissement |
 
 
 ## Golden example deltas
@@ -305,7 +305,7 @@ Lancements du 2026-10-08 : E2, E3, E4 et E5 lancés chacun par un agent neuf, l'
 
 ## Verdict
 
-**Provisoire — pas encore prêt** : 144 lignes met sur 145 lignes notables pour les 5 scénarios (AC13 et R9 non notées). Aucune ligne **(must)** ratée : AC3, AC9 et AC15 sont met sur E1 à E5, donc aucun scénario n'échoue. Il reste : (1) E5 AC1 ratée, à corriger (correction C1) ou à accepter ; (2) AC13 à vérifier dans Camunda pour les 5 fichiers. Le tour reste `in-progress` : je le clos (`round_status: complete`, `readiness`, compteurs) après ma vérification dans Camunda et ma décision sur E5 AC1.
+**Pas prêt** (tour clos le 2026-10-08) : 144 lignes met sur 145 lignes notées pour les 5 scénarios (AC13 et R9 non notées). Aucune ligne **(must)** ratée : AC3, AC9 et AC15 sont met sur E1 à E5, donc aucun scénario n'échoue. Le tour n'est pas prêt pour deux raisons : (1) E5 AC1 ratée, non acceptée, corrigée dans le skill (correction C1) ; (2) AC13 non vérifiée dans Camunda. Après ce tour, le skill a été corrigé (C1 à C4, programme BPMN de `generating-bpmn-files`) : un tour 2 sur E1 à E5 doit vérifier ces corrections. Les fichiers de ce tour sont rangés dans `runs/tour-1/`.
 
 ## Test records created
 
