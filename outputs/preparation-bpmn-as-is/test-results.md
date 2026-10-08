@@ -3,7 +3,7 @@ workflow: preparation-bpmn-as-is
 design_spec: outputs/preparation-bpmn-as-is/design-spec.md
 requirements: outputs/preparation-bpmn-as-is/requirements.md
 date: 2026-10-07
-environment: "Claude Code (cloud), aucun connecteur ; deux versions testées : A = /preparation-bpmn-as-is, B = /build-preparation-bpmn-as-is"
+environment: "Claude Code (cloud), aucun connecteur ; version testée : /preparation-bpmn-as-is (version fusionnée du 2026-10-08)"
 round_status: in-progress
 criteria_total: 0
 criteria_met: 0
@@ -12,10 +12,9 @@ results: {}
 
 # Test — Préparation BPMN As-Is (tour 1)
 
-Deux versions du même workflow sont testées sur les mêmes scénarios. Chaque scénario est lancé une fois par version, chaque fois dans une conversation neuve. Les entrées du bulletin portent le suffixe de la version : `E1-A`, `E1-B`, etc.
+Une seule version est testée : `.claude/skills/preparation-bpmn-as-is/SKILL.md`, lancée avec `/preparation-bpmn-as-is`. Depuis le 2026-10-08, elle reprend les forces du skill `/build-preparation-bpmn-as-is` (voir `build-notes.md`), qui n'est donc plus testé. Chaque scénario est lancé une fois, dans une conversation neuve.
 
-- **A** = `.claude/skills/preparation-bpmn-as-is/SKILL.md`, lancé avec `/preparation-bpmn-as-is`
-- **B** = `.claude/skills/build-preparation-bpmn-as-is/SKILL.md`, lancé avec `/build-preparation-bpmn-as-is`
+Le premier lancement d'E1 (2026-10-07, dans `runs.md`) a été fait avec l'ancienne version du skill : il ne compte pas pour ce tour et E1 est à relancer.
 
 Règle de réussite : le workflow est **prêt** quand chaque ligne est atteinte sur chaque scénario. Un raté sur une ligne **(must)** fait échouer le scénario. Tout autre raté est soit corrigé, soit accepté explicitement, et l'acceptation est notée.
 
@@ -58,7 +57,7 @@ Règle de réussite : le workflow est **prêt** quand chaque ligne est atteinte 
 
 ## Scenarios to run
 
-Ordre conseillé : E1-A, E1-B, E2-A, E2-B, E3-A, E3-B, E4-A, E4-B, E5-A, E5-B (10 lancements).
+Ordre conseillé : E1, E2, E3, E4, E5 (5 lancements).
 
 | ID | Entrée | Tests | Golden Example |
 |---|---|---|---|
