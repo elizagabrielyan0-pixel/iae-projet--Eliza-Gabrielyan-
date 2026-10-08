@@ -54,3 +54,10 @@ Après la comparaison (`comparaison.md`), mon skill garde ses points forts (desc
 - S2 : programme fixe `.claude/skills/generating-bpmn-files/scripts/tableau_vers_bpmn.py` (Python standard, aucune installation). Il lit le livrable, écrit le `.bpmn` et le vérifie ; S1 l'appelle à l'étape 6 quand l'outil peut lancer Python. La méthode à la main reste pour l'outil IA KPMG.
 - Ce que le programme corrige par rapport au tour 1 : flux qui traversaient des formes (E1, E2, E5), flux de message et noms de messages superposés (E2, E5), minuteries sans durée pour Camunda, éléments « À préciser » sans annotation.
 - Essai sur les 5 livrables du tour 1 : 0 anomalie de dessin, fichiers ouverts sans erreur ni avertissement par bpmn-js (moteur d'affichage de Camunda Modeler). Seule anomalie signalée : la minuterie « Mardi et jeudi » d'E5, sans durée chiffrée.
+
+## Corrections après le tour de test 2 (2026-10-08)
+- S2 (`generating-bpmn-files`, skill et programme) : P1 — l'annotation « À préciser / Non confirmé — voir question Qx » renvoie d'abord à la question bloquante qui cite l'élément. Vérifié sur les 5 livrables du tour 2 : seul E4 change ([SP1] renvoie à Q10 au lieu de Q9).
+- S1 (`preparation-bpmn-as-is`) : P2 — un rôle interne qui répond par mail = une tâche dans son couloir, pas un « Message reçu » ; une ligne `SPx` va dans le couloir où commence son détail. P3 — nom d'une fin qui n'a pas été dite (état atteint + `Supposé`, ou « À préciser — voir question Qx » si la fin n'a pas été abordée).
+- S1, cas difficiles : nouvelle règle « valeur absurde ou incohérente » (jamais corrigée, `Non confirmé`, question, alerte) ; consignes cachées cherchées dans toutes les sources, notes comprises.
+- S1, bloc `> ⚠️ Alerte : …` en haut du livrable et du résumé « Ce que j'ai fait » quand il y a un problème à signaler.
+- Plan de test : ligne E1 corrigée (P4). À tester au tour 3 : AC16 (bloc d'alerte) et un scénario E6 avec une valeur absurde.
