@@ -13,13 +13,29 @@
 <tr style="background:#DCE6F8"><td><b>Total</b></td><td>critères « must » ratés : <b>0</b> sur les 3 tours</td><td style="text-align:center"><b>144/145</b></td><td style="text-align:center"><b>145/145</b></td><td style="text-align:center"><b>149/150 · prêt</b></td></tr>
 </table>
 <div style="display:flex;gap:20px">
-<div style="flex:1.2;display:flex;flex-direction:column;gap:8px;background:#FDFCFA;border:1px solid #D5DBE5;border-top:6px solid #2457C5;border-radius:12px;padding:20px">
-<h3 style="font-size:26px;font-weight:600;color:#14213D">Corrigé, puis vérifié</h3>
+<div style="flex:2;display:flex;flex-direction:column;gap:8px;background:#FDFCFA;border:1px solid #D5DBE5;border-top:6px solid #2457C5;border-radius:12px;padding:20px">
+<h3 style="font-size:26px;font-weight:600;color:#14213D">Ce que j'ai modifié dans mon skill (revérifié au tour suivant)</h3>
+<div style="display:flex;gap:20px">
+<div style="flex:1;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;font-weight:600;color:#2457C5">Après le tour 1</p>
 <ul style="font-size:24px;line-height:1.3;display:flex;flex-direction:column;gap:6px">
-<li>Rôles internes mis en externes → C1 : vérifié au tour 2</li>
-<li>Flèches à travers les formes → programme Python : 0 anomalie</li>
-<li>Aucun sous-processus (A/B) → règle : 11 au tour 3</li>
+<li>Rôle interne (DAF) = couloir interne</li>
+<li>Trous visibles : « À préciser — Qx »</li>
+<li>Manque seuil, délai, fin → bloquant</li>
+<li>Programme Python : flèches propres</li>
 </ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;font-weight:600;color:#2457C5">Après le tour 2</p>
+<ul style="font-size:24px;line-height:1.3;display:flex;flex-direction:column;gap:6px">
+<li>Réponse d'un rôle interne = une tâche</li>
+<li>Fin non nommée : Supposé + question</li>
+<li>Valeur absurde : recopiée, signalée</li>
+<li>Bloc ⚠️ Alerte en haut du livrable</li>
+<li>Sous-processus proposés : 11 au tour 3</li>
+</ul>
+</div>
+</div>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#F8E3D3;border-radius:12px;padding:20px">
 <h3 style="font-size:26px;font-weight:600;color:#14213D">Échec assumé et limites</h3>
@@ -41,6 +57,8 @@
 - Tour 1 : un raté, des rôles internes (DAF, responsable budget) dessinés comme acteurs externes → correction C1, vérifiée au tour 2.
 - Le dessin avait des flèches qui traversaient les formes → programme Python : 0 anomalie ensuite.
 - La comparaison de mon skill avec celui du cours a montré qu'aucun ne proposait de sous-processus → nouvelle règle : 11 sous-processus au tour 3.
+- Ce que j'ai modifié dans le skill après le tour 1 : un rôle interne (DAF, responsable budget) est un couloir interne, même joint par mail (C1) ; un trou « À préciser » reste visible dans le .bpmn avec « voir question Qx » (C2) ; un seuil, un délai, un acteur ou une fin qui manque devient une question bloquante (C4) ; le programme Python écrit et vérifie le fichier.
+- Après le tour 2 : la réponse d'un rôle interne est une tâche dans son couloir, pas un message reçu (P2) ; une fin non nommée en atelier est « Supposé » avec une question (P3) ; l'annotation renvoie à la question bloquante (P1) ; nouvelle règle « valeur absurde » : recopiée, signalée, jamais corrigée ; bloc ⚠️ Alerte en haut du livrable ; règle des sous-processus. Chaque modification a été revérifiée au tour suivant.
 - Échec assumé : au tour 3, E5 dessine une attente avec une passerelle au lieu d'une minuterie. Pas un critère « must », se corrige à la main dans Camunda : accepté.
 - Aucun critère « must » raté sur les 3 tours.
 - Limites : aucun atelier réel, la relance jamais testée, la notation faite par Claude puis confirmée par moi (biais possible), le gain de temps pas encore mesuré.
