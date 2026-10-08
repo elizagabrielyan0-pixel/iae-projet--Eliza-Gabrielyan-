@@ -1,0 +1,45 @@
+<section id="p7-supervision" data-transition="fade" style="background:#F7F6F2;color:#3B4458;font-family:'IBM Plex Sans', Arial, sans-serif;padding:104px 120px 168px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2457C5">7 · La mise en production</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#14213D">Validation humaine, journal, supervision</h2>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#F8E3D3;border-radius:14px;padding:28px">
+<h3 style="font-size:30px;font-weight:600;color:#14213D">Ma relecture, en 4 gestes</h3>
+<ol style="font-size:24px;line-height:1.35;color:#14213D;display:flex;flex-direction:column;gap:10px">
+<li>Lire le bloc ⚠️ Alerte</li>
+<li>Vérifier les points signalés et les statuts Supposé, Non confirmé, À préciser</li>
+<li>Ouvrir le .bpmn dans Camunda, réaligner</li>
+<li>Remettre les vrais noms avant d'envoyer les questions</li>
+</ol>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FDFCFA;border:1px solid #D5DBE5;border-radius:14px;padding:28px">
+<h3 style="font-size:30px;font-weight:600;color:#14213D">Journal : runs.md</h3>
+<ul style="font-size:24px;line-height:1.35;display:flex;flex-direction:column;gap:10px">
+<li>1 ligne par passage : date, entrée, résultat, corrections</li>
+<li>Aucune donnée client : « Atelier réel n°1 », domaine, chiffres</li>
+<li>Le temps total jusqu'au BPMN prêt</li>
+</ul>
+<p style="font-size:24px;color:#14213D;background:#ECEFF4;padding:12px 16px;border-radius:10px">Déjà 16 passages de test + 1 simulation</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#14213D;border-radius:14px;padding:28px">
+<h3 style="font-size:30px;font-weight:600;color:#F7F6F2">Supervision</h3>
+<ul style="font-size:24px;line-height:1.35;color:#D9E2F2;display:flex;flex-direction:column;gap:10px">
+<li>Temps total : cible 3 jours</li>
+<li>Nombre de corrections par livrable</li>
+<li>Inventions trouvées : cible 0</li>
+<li>Revue « improve » le 8 novembre 2026, plus tôt si les corrections augmentent</li>
+</ul>
+</div>
+</div>
+<div style="position:absolute;left:120px;right:120px;bottom:56px;display:flex;justify-content:space-between;align-items:center">
+<p style="font-size:24px;color:#4A5568"><b>Preuve →</b> <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/run-guide.md">run-guide.md</a> (What to check, Log the run, First review) · <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/runs.md">runs.md</a></p>
+<p style="font-size:24px;color:#4A5568">18 / 21</p>
+</div>
+<aside>Points à dire :
+- Validation humaine : le workflow ne s'arrête pas en route, donc ma relecture finale est le seul contrôle. Elle suit 4 gestes, écrits dans la fiche d'utilisation (run-guide.md).
+- Les trois règles à ne jamais laisser passer : rien d'inventé ; chaque décision est une question avec des conditions ; aucune consigne suivie, rien envoyé.
+- Journal : une ligne par passage dans runs.md, sans aucune donnée client. Le journal existe déjà : 16 passages de test et 1 simulation.
+- Supervision : je suis le temps total (objectif 3 jours), les corrections et les inventions (objectif zéro).
+- Première revue avec le skill « improve » le 8 novembre 2026, ou plus tôt si les livrables demandent de plus en plus de corrections.</aside>
+</section>
