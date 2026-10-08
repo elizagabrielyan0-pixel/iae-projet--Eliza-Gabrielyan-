@@ -1,0 +1,34 @@
+<section id="p4-choix" data-transition="fade" style="background:#F7F6F2;color:#3B4458;font-family:'IBM Plex Sans', Arial, sans-serif;padding:104px 120px 168px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2457C5">4 · L'architecture</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#14213D">Mes choix et mes non-choix</h2>
+</div>
+<div style="display:flex;gap:28px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:26px;font-weight:600;color:#F7F6F2;background:#2457C5;padding:12px 20px;border-radius:10px">Je fais — parce que…</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Un skill</b> : les étapes sont toujours les mêmes et c'est moi qui lance</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Des fichiers de référence</b> : mes conventions non écrites deviennent explicites</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Un programme Python</b> : un XML juste à chaque fois, vérifié</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Le .bpmn dès la v1</b> : c'était le risque principal, à tester tout de suite</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Un bloc ⚠️ Alerte</b> : ma relecture commence par l'essentiel</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:26px;font-weight:600;color:#14213D;background:#F2B98F;padding:12px 20px;border-radius:10px">Je ne fais pas — parce que…</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Pas d'agent</b> : laisser l'IA choisir son chemin = du risque sans gain</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Pas de MCP ni d'API</b> : rien à lire ailleurs, et rien ne doit partir</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Pas de pause au milieu</b> : une seule relecture, à la fin, suffit</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Pas de « to-be »</b> ni de configuration SAP (R5, R6)</p>
+<p style="font-size:24px;background:#FDFCFA;border:1px solid #D5DBE5;padding:14px 18px;border-radius:10px"><b style="color:#14213D">Pas de reprise de Camunda</b> à la relance : version future (R9)</p>
+</div>
+</div>
+<div style="position:absolute;left:120px;right:120px;bottom:56px;display:flex;justify-content:space-between;align-items:center">
+<p style="font-size:24px;color:#4A5568"><b>Preuve →</b> <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/design-spec.md">design-spec.md</a> (Execution Pattern, Safety &amp; Permissions, Future Enhancement)</p>
+<p style="font-size:24px;color:#4A5568">10 / 21</p>
+</div>
+<aside>Points à dire :
+- Skill plutôt qu'agent : un agent choisit lui-même son chemin et peut tourner sans surveillance. Ici les 6 étapes sont toujours les mêmes : un agent n'apporterait rien et ajouterait du risque.
+- Aucun connecteur (MCP) ni API : le workflow n'a rien à aller chercher ailleurs, et surtout il ne doit rien envoyer. Moins d'accès = moins de risque sur des données confidentielles.
+- Pas de validation au milieu : comme rien ne peut sortir sans moi, une relecture finale suffit.
+- Hors périmètre : le processus cible (to-be) et la configuration SAP. Le workflow décrit l'existant, c'est tout.
+- Reporté à plus tard : reprendre les corrections que je fais dans Camunda quand je relance le workflow.</aside>
+</section>

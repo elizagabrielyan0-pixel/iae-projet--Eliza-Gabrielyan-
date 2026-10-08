@@ -1,0 +1,45 @@
+<section id="p3-matrice" data-transition="fade" style="background:#ECEFF4;color:#3B4458;font-family:'IBM Plex Sans', Arial, sans-serif;padding:104px 120px 168px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2457C5">3 · Le classement</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#14213D">Guided × Augmented : l'IA propose, je relis</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="width:900px;display:grid;grid-template-columns:240px 1fr 1fr;gap:10px">
+<p style="font-size:24px;font-weight:600;color:#4A5568">Autonomie ↓ · Implication →</p>
+<p style="font-size:26px;font-weight:600;color:#14213D;text-align:center;padding:10px">Augmented<br><span style="color:#4A5568">humain pendant</span></p>
+<p style="font-size:26px;font-weight:600;color:#14213D;text-align:center;padding:10px">Automated<br><span style="color:#4A5568">humain à la fin</span></p>
+<p style="font-size:26px;font-weight:600;color:#14213D;padding:24px 10px">Autonomous</p>
+<div style="background:#F7F6F2;border:1px solid #D5DBE5;border-radius:12px"></div>
+<div style="background:#F7F6F2;border:1px solid #D5DBE5;border-radius:12px"></div>
+<p style="font-size:26px;font-weight:600;color:#14213D;padding:24px 10px">Guided</p>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:4px;background:#2457C5;border-radius:12px;padding:20px">
+<p style="font-size:28px;font-weight:600;color:#F7F6F2">★ Mon workflow</p>
+<p style="font-size:24px;color:#DCE6F8">étapes 2, 3, 4 (jugement encadré)</p>
+</div>
+<div style="background:#F7F6F2;border:1px solid #D5DBE5;border-radius:12px"></div>
+<p style="font-size:26px;font-weight:600;color:#14213D;padding:24px 10px">Deterministic</p>
+<div style="display:flex;flex-direction:column;justify-content:center;background:#DCE6F8;border-radius:12px;padding:20px">
+<p style="font-size:24px;color:#14213D">étapes 1, 5, 6 (règles fixes)</p>
+</div>
+<div style="background:#F7F6F2;border:1px solid #D5DBE5;border-radius:12px"></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px">
+<h3 style="font-size:30px;font-weight:600;color:#14213D">Où est l'humain ?</h3>
+<p style="font-size:24px;color:#14213D;background:#F8E3D3;padding:10px 16px;border-radius:10px"><b>Avant :</b> j'anonymise, je vérifie le contrat, je lance</p>
+<p style="font-size:24px;color:#14213D;background:#F7F6F2;border:1px solid #D5DBE5;padding:10px 16px;border-radius:10px"><b>Pendant :</b> aucune pause (seul arrêt : notes absentes)</p>
+<p style="font-size:24px;color:#14213D;background:#F8E3D3;padding:10px 16px;border-radius:10px"><b>Après :</b> relecture finale = le point de contrôle, avant tout envoi au client</p>
+<p style="font-size:24px;color:#14213D;background:#F8E3D3;padding:10px 16px;border-radius:10px"><b>Ensuite :</b> questions au client, Camunda, relance</p>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#F7F6F2;background:#14213D;padding:22px 32px;border-radius:14px"><b>En une phrase :</b> Guided, car l'IA juge (statuts, questions) mais dans un ordre fixe et des règles fermées ; Augmented, car c'est moi qui lance et qui relis tout avant que rien ne parte chez le client.</p>
+<div style="position:absolute;left:120px;right:120px;bottom:56px;display:flex;justify-content:space-between;align-items:center">
+<p style="font-size:24px;color:#4A5568"><b>Preuve →</b> <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/design-spec.md">design-spec.md</a> (Autonomy Spectrum, Step-by-Step Decomposition) · <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/ai-opportunity-report.md">ai-opportunity-report.md</a></p>
+<p style="font-size:24px;color:#4A5568">7 / 21</p>
+</div>
+<aside>Points à dire :
+- Autonomie « Guided » : l'IA ne choisit pas son chemin (sinon ce serait Autonomous, donc un agent). Elle exerce un jugement encadré : quel statut, quelle question, quel type BPMN.
+- Étape par étape : 1, 5 et 6 suivent des règles fixes (Deterministic) ; 2, 3 et 4 demandent du jugement (Guided).
+- Implication « Augmented » : je déclenche moi-même et je relis tout. Rien ne part chez le client sans moi.
+- Choix assumé : pas de validation au milieu, une seule relecture à la fin. La revue des requirements l'a relevé ; je l'ai gardé parce que la relecture finale suffit : le workflow n'envoie rien, donc une erreur ne peut pas sortir sans moi.
+- Pour rendre cette relecture efficace : un bloc « ⚠️ Alerte » en haut du livrable résume ce qu'il faut regarder en premier.</aside>
+</section>

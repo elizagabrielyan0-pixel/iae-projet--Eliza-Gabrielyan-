@@ -1,0 +1,39 @@
+<section id="p5-chaine" data-transition="fade" style="background:#F7F6F2;color:#3B4458;font-family:'IBM Plex Sans', Arial, sans-serif;padding:104px 120px 168px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2457C5">5 · La chaîne de données</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#14213D">D'où vient chaque donnée, et à qui elle est</h2>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<p style="font-size:24px;color:#14213D;background:#FDFCFA;border:1px solid #D5DBE5;padding:12px 16px;border-radius:10px">Sources C1–C3</p>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:18px"></x-shape>
+<p style="font-size:24px;color:#14213D;background:#F8E3D3;padding:12px 16px;border-radius:10px"><b>Moi :</b> anonymiser</p>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:18px"></x-shape>
+<p style="font-size:24px;color:#F7F6F2;background:#14213D;padding:12px 16px;border-radius:10px">IA KPMG + C4–C7</p>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:18px"></x-shape>
+<p style="font-size:24px;color:#14213D;background:#DCE6F8;padding:12px 16px;border-radius:10px">Livrable + .bpmn</p>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:18px"></x-shape>
+<p style="font-size:24px;color:#14213D;background:#F8E3D3;padding:12px 16px;border-radius:10px"><b>Moi :</b> relire</p>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:18px"></x-shape>
+<p style="font-size:24px;color:#14213D;background:#FDFCFA;border:1px solid #D5DBE5;padding:12px 16px;border-radius:10px">Client</p>
+</div>
+<table style="font-size:24px;color:#14213D;width:1680px">
+<tr><th style="width:30%">Donnée</th><th style="width:17%">Origine</th><th style="width:17%">Sensibilité</th><th style="width:22%">Propriétaire</th><th style="width:14%">Lisible IA</th></tr>
+<tr style="background:#F8E3D3"><td><b>C1</b> notes d'atelier</td><td>moi</td><td>Confidentiel</td><td>consultante</td><td>oui</td></tr>
+<tr style="background:#F8E3D3"><td><b>C2</b> PDF du client</td><td>client</td><td>Confidentiel</td><td>client</td><td>en partie</td></tr>
+<tr style="background:#F8E3D3"><td><b>C3</b> Teams, mails, réponses</td><td>client</td><td>Confidentiel</td><td>client</td><td>oui</td></tr>
+<tr><td><b>C4</b> conventions (v0.1)</td><td>KPMG + projet</td><td>Interne</td><td>équipe projet</td><td>oui</td></tr>
+<tr><td><b>C5, C6</b> modèles BPMN</td><td>moi</td><td>Interne</td><td>consultante</td><td>oui</td></tr>
+<tr><td><b>C7</b> norme BPMN 2.0</td><td>norme publique</td><td>Public</td><td>—</td><td>oui</td></tr>
+<tr style="background:#DCE6F8"><td><b>Sorties</b> livrable + .bpmn</td><td>workflow</td><td>Interne</td><td>consultante, équipe</td><td>—</td></tr>
+</table>
+<div style="position:absolute;left:120px;right:120px;bottom:56px;display:flex;justify-content:space-between;align-items:center">
+<p style="font-size:24px;color:#4A5568"><b>Preuve →</b> <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/requirements.md">requirements.md</a> (Context Inventory, Access) · <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/design-spec.md">design-spec.md</a> (Data Readiness)</p>
+<p style="font-size:24px;color:#4A5568">11 / 21</p>
+</div>
+<aside>Points à dire :
+- Trois sources client (en orange) : mes notes, les PDF du client, les échanges Teams ou mails. Toutes confidentielles.
+- Quatre fichiers de contexte : mes conventions C4 (encore un brouillon v0.1, à compléter avec l'équipe), deux modèles BPMN, la norme BPMN 2.0.
+- Le propriétaire : mes notes et les modèles sont à moi ; les PDF et les échanges appartiennent au client ; les conventions à l'équipe projet ; les sorties sont des documents internes, pour moi et l'équipe.
+- Le point faible connu : les PDF scannés sont lus « en partie » ; l'IA le signale (« lecture incertaine »).
+- La chaîne a deux points humains : j'anonymise avant, je relis après. Le client ne reçoit que ce que je lui envoie moi-même.</aside>
+</section>

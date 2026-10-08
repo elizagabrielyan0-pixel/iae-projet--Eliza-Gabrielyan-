@@ -1,0 +1,29 @@
+<section id="p6-limites" data-transition="fade" style="background:#F7F6F2;color:#3B4458;font-family:'IBM Plex Sans', Arial, sans-serif;padding:104px 120px 168px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2457C5">6 · Les tests</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:60px;font-weight:600;line-height:1.1;color:#14213D">Les limites connues, sans les cacher</h2>
+</div>
+<table style="font-size:24px;color:#14213D;width:1680px">
+<tr><th style="width:50%">Limite</th><th style="width:50%">Comment je la lève</th></tr>
+<tr style="background:#F8E3D3"><td><b>0 atelier réel</b> : seulement des données inventées</td><td>préprod sur un atelier déjà traité (partie 7)</td></tr>
+<tr style="background:#F8E3D3"><td><b>Gain de temps non prouvé</b> : 5 jours estimés</td><td>chronométrer les 3 premiers ateliers</td></tr>
+<tr><td><b>Relance (R9)</b> jamais testée</td><td>scénario de relance au prochain tour</td></tr>
+<tr><td><b>Valeur absurde, bloc d'alerte</b> : pas de test dédié</td><td>ajouter AC16 et un scénario E6 (P8)</td></tr>
+<tr><td><b>Notes données par Claude</b>, confirmées par moi</td><td>refaire une notation à la main sur 1 scénario</td></tr>
+<tr><td><b>Outil IA KPMG</b> pas encore vérifié</td><td>vérifier fichiers, PDF scannés, .bpmn</td></tr>
+<tr><td><b>Conventions C4</b> encore en brouillon v0.1</td><td>les compléter avec l'équipe projet</td></tr>
+</table>
+<div style="position:absolute;left:120px;right:120px;bottom:56px;display:flex;justify-content:space-between;align-items:center">
+<p style="font-size:24px;color:#4A5568"><b>Preuve →</b> <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/test-results.md">test-results.md</a> (Verdict, Corrections proposées) · <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/run-guide.md">run-guide.md</a></p>
+<p style="font-size:24px;color:#4A5568">16 / 21</p>
+</div>
+<aside>Points à dire :
+- Je préfère dire moi-même ce que mes tests ne prouvent pas.
+- Le plus important : aucun vrai atelier n'a encore été traité. Toutes les données sont inventées, pour ne jamais mettre de données client dans GitHub.
+- Le gain de temps (5 jours → 3 jours) reste à prouver : les 5 jours sont une estimation.
+- La relance avec les réponses du client n'a jamais été testée.
+- Deux règles ajoutées tard (valeur absurde, bloc d'alerte) n'ont pas encore de scénario de test dédié.
+- La notation a été faite par Claude puis confirmée par moi : il peut y avoir un biais.
+- L'outil IA interne KPMG n'a pas encore été vérifié, et mes conventions C4 sont encore un brouillon.
+- Pour chaque limite, j'ai une action prévue : c'est ce qui conditionne ma recommandation.</aside>
+</section>

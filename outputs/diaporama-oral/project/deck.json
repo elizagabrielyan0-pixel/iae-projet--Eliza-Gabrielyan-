@@ -1,0 +1,24 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-10-08T12:00:00Z"},
+  "lists": "css",
+  "title": "Oral — Préparation BPMN As-Is",
+  "cover": "cover",
+  "order": ["cover", "plan", "p1-probleme", "p1-choix", "p2-workflow", "p2-regles", "p3-matrice", "p4-schema", "p4-skills", "p4-choix", "p5-chaine", "p5-controles", "p6-tableau", "p6-pieges", "p6-corrections", "p6-limites", "p7-environnements", "p7-supervision", "p7-gouvernance", "p7-reco", "annexe-preuves"],
+  "sections": {
+    "intro": {"description": "Le projet en une phrase et le fil de l'oral", "start": "cover"},
+    "s1": {"description": "1 · Le problème métier et le choix parmi les 5 candidats", "start": "p1-probleme"},
+    "s2": {"description": "2 · Le workflow déconstruit : étapes, décisions, cas d'échec", "start": "p2-workflow"},
+    "s3": {"description": "3 · Le classement sur la matrice autonomie × implication", "start": "p3-matrice"},
+    "s4": {"description": "4 · L'architecture : deux skills, choix et non-choix", "start": "p4-schema"},
+    "s5": {"description": "5 · La chaîne de données et les contrôles", "start": "p5-chaine"},
+    "s6": {"description": "6 · Les tests : scores, pièges, corrections, limites", "start": "p6-tableau"},
+    "s7": {"description": "7 · La mise en production et la recommandation", "start": "p7-environnements"},
+    "annexe": {"description": "Annexe : toutes les preuves du dépôt GitHub", "start": "annexe-preuves"}
+  },
+  "faces": {
+    "rubik": {"family": "Rubik", "href": "https://fonts.googleapis.com/css2?family=Rubik:wght@400..700&display=swap"},
+    "ibm-plex-sans": {"family": "IBM Plex Sans", "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"}
+  },
+  "designSystems": []
+}
