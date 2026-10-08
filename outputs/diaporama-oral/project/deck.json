@@ -1,22 +1,65 @@
 {
   "v": 4,
-  "createdOnFiles": {"v": 1, "at": "2026-10-08T12:00:00Z"},
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-08T12:00:00Z"
+  },
   "lists": "css",
   "title": "Oral — Préparation BPMN As-Is",
-  "cover": "s1-probleme",
-  "order": ["s1-probleme", "s2-workflow", "s3-classement", "s4-architecture", "s5-donnees", "s6-tests", "s7-production"],
+  "cover": "s0-proposition",
+  "order": [
+    "s0-proposition",
+    "s1-probleme",
+    "s2-workflow",
+    "s3-classement",
+    "s4-architecture",
+    "s5-donnees",
+    "s6-tests",
+    "s7-production"
+  ],
   "sections": {
-    "s1": {"description": "1 · Le problème métier", "start": "s1-probleme"},
-    "s2": {"description": "2 · Le workflow déconstruit", "start": "s2-workflow"},
-    "s3": {"description": "3 · Le classement", "start": "s3-classement"},
-    "s4": {"description": "4 · L'architecture", "start": "s4-architecture"},
-    "s5": {"description": "5 · La chaîne de données", "start": "s5-donnees"},
-    "s6": {"description": "6 · Les tests", "start": "s6-tests"},
-    "s7": {"description": "7 · La mise en production", "start": "s7-production"}
+    "s0": {
+      "description": "Ma proposition : gains, investissement, risques, objectifs KPMG",
+      "start": "s0-proposition"
+    },
+    "s1": {
+      "description": "1 · Le problème métier",
+      "start": "s1-probleme"
+    },
+    "s2": {
+      "description": "2 · Le workflow déconstruit",
+      "start": "s2-workflow"
+    },
+    "s3": {
+      "description": "3 · Le classement",
+      "start": "s3-classement"
+    },
+    "s4": {
+      "description": "4 · L'architecture",
+      "start": "s4-architecture"
+    },
+    "s5": {
+      "description": "5 · La chaîne de données",
+      "start": "s5-donnees"
+    },
+    "s6": {
+      "description": "6 · Les tests",
+      "start": "s6-tests"
+    },
+    "s7": {
+      "description": "7 · La mise en production",
+      "start": "s7-production"
+    }
   },
   "faces": {
-    "rubik": {"family": "Rubik", "href": "https://fonts.googleapis.com/css2?family=Rubik:wght@400..700&display=swap"},
-    "ibm-plex-sans": {"family": "IBM Plex Sans", "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"}
+    "rubik": {
+      "family": "Rubik",
+      "href": "https://fonts.googleapis.com/css2?family=Rubik:wght@400..700&display=swap"
+    },
+    "ibm-plex-sans": {
+      "family": "IBM Plex Sans",
+      "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    }
   },
   "designSystems": []
 }
