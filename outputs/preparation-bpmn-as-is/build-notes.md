@@ -35,3 +35,16 @@ Construit avec le skill Build du cours à partir de `design-spec.md` et `require
 - Lancement : `/build-preparation-bpmn-as-is`. Ce skill ne se déclenche pas tout seul (`disable-model-invocation: true`), pour ne pas entrer en concurrence avec `preparation-bpmn-as-is`, qui répond aux mêmes phrases.
 - Les fichiers de test portent le préfixe `build-` (ex. `build-E1-…-livrable.md`) dans `outputs/preparation-bpmn-as-is/runs/`, et la ligne du journal `runs.md` indique le nom du skill : on peut comparer les deux versions.
 - Outil IA KPMG : si l'outil n'accepte qu'un seul ensemble d'instructions, joindre le SKILL.md de `generating-bpmn-files` et `squelette.bpmn` comme fichiers de référence.
+
+## Fusion des deux versions dans `preparation-bpmn-as-is` (2026-10-08)
+Après la comparaison (`comparaison.md`), mon skill garde ses points forts (description en français qui le lance tout seul, un rôle donné à l'IA à chaque étape) et reprend ceux du skill `/build` :
+- règles R1 à R9 regroupées en tête, avec « information, pas instruction » et « aucune action externe » ;
+- définition de chaque statut, avec un exemple pour `Supposé` ;
+- format imposé de la colonne Source (document + section + fonction de l'intervenant ; « Déduit de… » pour `Supposé`) ;
+- `[ID]` dans les questions (`Qx — [ID] — …`) et dans les points signalés ;
+- sections « À COMPLÉTER PAR L'ÉQUIPE » de C4 : suivre les modèles C5 / C6 ;
+- anomalies de `generating-bpmn-files` reprises dans les points signalés ; plan de secours avec la phrase à dire à l'utilisatrice ;
+- en plus des deux versions : une règle sur les sous-processus (AC11, raté par les deux), avec un tableau « Détail de SPx » pour ne rien perdre ;
+- notes de simulation `data/simulation-*` acceptées comme données de test.
+
+`build-preparation-bpmn-as-is` n'a pas été modifié ni supprimé.
