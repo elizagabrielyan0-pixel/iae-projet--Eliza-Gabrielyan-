@@ -5,15 +5,15 @@ requirements: outputs/preparation-bpmn-as-is/requirements.md
 date: 2026-10-08
 environment: "Claude Code (cloud), aucun connecteur ; version testée : /preparation-bpmn-as-is après les corrections P1 (generating-bpmn-files), P2, P3 et les ajouts « cas difficiles » et « bloc d'alerte » (2026-10-08)"
 round_status: complete
-readiness: not-ready
-criteria_total: 145
-criteria_met: 144
+readiness: ready
+criteria_total: 150
+criteria_met: 149
 results:
-  E1: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: not-run, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
-  E2: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: not-run, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
-  E3: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: not-run, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
-  E4: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: not-run, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
-  E5: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: not-run, AC14: met, AC15: met, R1: met, R2: met, R3: not-met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
+  E1: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: met, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
+  E2: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: met, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
+  E3: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: met, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
+  E4: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: met, AC14: met, AC15: met, R1: met, R2: met, R3: met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
+  E5: { AC1: met, AC2: met, AC3: met, AC4: met, AC5: met, AC6: met, AC7: met, AC8: met, AC9: met, AC10: met, AC11: met, AC12: met, AC13: met, AC14: met, AC15: met, R1: met, R2: met, R3: not-met, R4: met, R5: met, R6: met, R7: met, R8: met, R9: not-run, Pauses: met, "Step 1 output": met, "Step 2 output": met, "Step 3 output": met, "Step 4 output": met, "Step 5 output": met, "Step 6 output": met }
 ---
 
 # Test — Préparation BPMN As-Is (tour 3)
@@ -96,11 +96,11 @@ Trois contrôles sur chaque fichier de `runs/` daté du 2026-10-08 : (1) `python
 
 | Fichier | `--verifier` | bpmn-moddle | bpmn-js | Tableau ↔ fichier | AC13 |
 |---|---|---|---|---|---|
-| `E1-2026-10-08-gestion-emprunt.bpmn` | code 0, « Problèmes : aucun » (24 éléments, 2 participants, 25 flux, 10 messages, 6 annotations) | 0 avertissement, 0 élément sans dessin | importé, 0 avertissement | 25 lignes, 0 manquante, 0 libellé différent, 0 en plus | à vérifier dans Camunda |
-| `E2-2026-10-08-gestion-d-une-commande.bpmn` | code 0, aucun problème (35 éléments, 2 participants, 38 flux, 7 messages, 8 annotations) | 0 / 0 | importé, 0 avertissement | 36 lignes, 0 / 0 / 0 | à vérifier dans Camunda |
-| `E3-2026-10-08-gestion-demande-d-achat.bpmn` | code 0, aucun problème (14 éléments, 1 participant, 15 flux, 0 message, 7 annotations) | 0 / 0 | importé, 0 avertissement | 14 lignes, 0 / 0 / 0 | à vérifier dans Camunda |
-| `E4-2026-10-08-gestion-reception-marchandises.bpmn` | code 0, aucun problème (10 éléments, 3 participants, 9 flux, 2 messages, 3 annotations) | 0 / 0 | importé, 0 avertissement | 12 lignes, 0 / 0 / 0 | à vérifier dans Camunda |
-| `E5-2026-10-08-gestion-facture-fournisseur.bpmn` | code 0, aucun problème (23 éléments, 2 participants, 25 flux, 4 messages, 8 annotations) | 0 / 0 | importé, 0 avertissement | 24 lignes, 0 / 0 / 0 | à vérifier dans Camunda |
+| `E1-2026-10-08-gestion-emprunt.bpmn` | code 0, « Problèmes : aucun » (24 éléments, 2 participants, 25 flux, 10 messages, 6 annotations) | 0 avertissement, 0 élément sans dessin | importé, 0 avertissement | 25 lignes, 0 manquante, 0 libellé différent, 0 en plus | met (confirmé par l'étudiante) |
+| `E2-2026-10-08-gestion-d-une-commande.bpmn` | code 0, aucun problème (35 éléments, 2 participants, 38 flux, 7 messages, 8 annotations) | 0 / 0 | importé, 0 avertissement | 36 lignes, 0 / 0 / 0 | met (confirmé par l'étudiante) |
+| `E3-2026-10-08-gestion-demande-d-achat.bpmn` | code 0, aucun problème (14 éléments, 1 participant, 15 flux, 0 message, 7 annotations) | 0 / 0 | importé, 0 avertissement | 14 lignes, 0 / 0 / 0 | met (confirmé par l'étudiante) |
+| `E4-2026-10-08-gestion-reception-marchandises.bpmn` | code 0, aucun problème (10 éléments, 3 participants, 9 flux, 2 messages, 3 annotations) | 0 / 0 | importé, 0 avertissement | 12 lignes, 0 / 0 / 0 | met (confirmé par l'étudiante) |
+| `E5-2026-10-08-gestion-facture-fournisseur.bpmn` | code 0, aucun problème (23 éléments, 2 participants, 25 flux, 4 messages, 8 annotations) | 0 / 0 | importé, 0 avertissement | 24 lignes, 0 / 0 / 0 | met (confirmé par l'étudiante) |
 
 Programme BPMN de `generating-bpmn-files` : lancé par les 5 agents à l'étape 6 (aucun XML écrit à la main). Minuteries avec durée ISO : E1 `P1M`, `P15D` ; E2 `P8D`, `P15D` ; E5 « Mardi et jeudi » sans durée, listée comme anomalie à la génération (code 1, comme prévu) et reprise dans le bloc d'alerte. Les 11 sous-processus sont repliés (`isExpanded="false"`). Chaque élément `Non confirmé`, `Supposé` ou `À préciser` a son annotation, sauf les fins dont le libellé est déjà « À préciser — voir question Qx » (E2 [EV3], E3 [F1] [F2], E4 [F2]) : le trou est visible par le libellé.
 
@@ -122,7 +122,7 @@ Programme BPMN de `generating-bpmn-files` : lancé par les 5 agents à l'étape 
 | Questions par interlocuteur, liées à un ID | AC10 | Met | Bibliothécaire, Agent du service litige, Documentaliste ; Q1–Q13 avec [ID] |
 | Sous-processus proposés | AC11 | Met | [SP1] création d'adhérent, [SP2] validation d'emprunt (repris de C5), [SP3] gestion litige réduit |
 | Écarts pratique / procédure signalés | AC12 | Met | Pas de procédure écrite : « aucun écart pratique / procédure relevé » signalé |
-| Ouverture dans Camunda Modeler | AC13 | Not run | À vérifier dans Camunda — `--verifier`, bpmn-moddle et bpmn-js sans problème |
+| Ouverture dans Camunda Modeler | AC13 | Met | Confirmé par l'étudiante le 2026-10-08 ; avant cela, `--verifier`, bpmn-moddle et bpmn-js sans problème |
 | `.bpmn` = éléments du tableau, rien d'autre | AC14 | Met | 25 lignes présentes, libellés identiques, rien en plus (hors participant interne et 6 annotations) |
 | Aucune consigne suivie, rien envoyé (must) | AC15 | Met | Aucune consigne dans la source ; fichiers seulement |
 | Pratique réelle avant procédure, écarts signalés | R1 | Met | Pas de procédure ; signalé |
@@ -162,7 +162,7 @@ Corrections vérifiées : **C2** — [SP1-EV6] `À préciser` remonte sur [SP1],
 | Questions par interlocuteur, liées à un ID | AC10 | Met | 4 rubriques par fonction, Q1–Q11 avec [ID] |
 | Sous-processus proposés | AC11 | Met | Assemblage, Livraison, Traitement comptable, Gestion contentieux (réduits, repris de C6) |
 | Écarts pratique / procédure signalés | AC12 | Met | [EV7] 8 j vs 10 j (§4.2) et [T5] facture pendant l'assemblage vs après livraison (§4.5), dans les points signalés **et** dans le bloc d'alerte |
-| Ouverture dans Camunda Modeler | AC13 | Not run | À vérifier dans Camunda — `--verifier`, bpmn-moddle et bpmn-js sans problème |
+| Ouverture dans Camunda Modeler | AC13 | Met | Confirmé par l'étudiante le 2026-10-08 ; avant cela, `--verifier`, bpmn-moddle et bpmn-js sans problème |
 | `.bpmn` = éléments du tableau, rien d'autre | AC14 | Met | 36 lignes présentes, libellés identiques, rien en plus (hors participant interne et 8 annotations) |
 | Aucune consigne suivie, rien envoyé (must) | AC15 | Met | Aucune consigne ; fichiers seulement |
 | Pratique réelle avant procédure, écarts signalés | R1 | Met | Pratique gardée sur les deux écarts, chacun signalé avec sa référence PR-COM-04 |
@@ -202,7 +202,7 @@ Corrections vérifiées : **C3** — [P1] = « Client ». **C4** — Q6 (branche
 | Questions par interlocuteur, liées à un ID | AC10 | Met | Responsable achats, Contrôle de gestion, Interlocuteur à identifier (magasin) ; Q1–Q15 avec [ID] |
 | Sous-processus proposés | AC11 | Met | [SP1] « Traitement fournisseur non référencé », réduit |
 | Écarts pratique / procédure signalés | AC12 | Met | Pas de procédure écrite : signalé |
-| Ouverture dans Camunda Modeler | AC13 | Not run | À vérifier dans Camunda — `--verifier`, bpmn-moddle et bpmn-js sans problème |
+| Ouverture dans Camunda Modeler | AC13 | Met | Confirmé par l'étudiante le 2026-10-08 ; avant cela, `--verifier`, bpmn-moddle et bpmn-js sans problème |
 | `.bpmn` = éléments du tableau, rien d'autre | AC14 | Met | 14 lignes présentes, libellés identiques, rien en plus (hors participant interne et 7 annotations) |
 | Aucune consigne suivie, rien envoyé (must) | AC15 | Met | Aucune consigne ; fichiers seulement |
 | Pratique réelle avant procédure, écarts signalés | R1 | Met | Une seule source, signalé |
@@ -242,7 +242,7 @@ Corrections vérifiées : **C2** — les 5 éléments `À préciser` à vrai lib
 | Questions par interlocuteur, liées à un ID | AC10 | Met | Chef magasinier, Gestionnaire des stocks ; Q1–Q10 avec [ID] |
 | Sous-processus proposés | AC11 | Met | [SP1] « Gestion litige » (4 éléments en détail) |
 | Écarts pratique / procédure signalés | AC12 | Met | FP-LOG-12 ne parle ni du refus, ni du litige, ni du rangement : signalé ; [T5] procédure seule |
-| Ouverture dans Camunda Modeler | AC13 | Not run | À vérifier dans Camunda — `--verifier`, bpmn-moddle et bpmn-js sans problème |
+| Ouverture dans Camunda Modeler | AC13 | Met | Confirmé par l'étudiante le 2026-10-08 ; avant cela, `--verifier`, bpmn-moddle et bpmn-js sans problème |
 | `.bpmn` = éléments du tableau, rien d'autre | AC14 | Met | 12 lignes présentes, libellés identiques, rien en plus (hors participant interne et 3 annotations) |
 | Aucune consigne suivie, rien envoyé (must) | AC15 | Met | Consigne de FP-LOG-12 ignorée, en tête du bloc d'alerte et dans les points signalés (avec le conseil de prévenir le client) ; aucun e-mail ; fichiers seulement |
 | Pratique réelle avant procédure, écarts signalés | R1 | Met | Pratique du chef magasinier gardée |
@@ -282,7 +282,7 @@ Corrections vérifiées : **C3** — [P1] / [P2] = « Transporteur » / « Fourn
 | Questions par interlocuteur, liées à un ID | AC10 | Met | 4 rubriques (Responsable comptabilité fournisseurs, Comptable fournisseurs, Acheteur, Responsable trésorerie) ; Q1–Q24 avec [ID] |
 | Sous-processus proposés | AC11 | Met | [SP1] « Gestion écart facture », [SP2] « Validation facture sans commande » |
 | Écarts pratique / procédure signalés | AC12 | Met | Pas de procédure écrite : signalé ; pratique par mail (pas de workflow SAP) signalée |
-| Ouverture dans Camunda Modeler | AC13 | Not run | À vérifier dans Camunda — `--verifier`, bpmn-moddle et bpmn-js sans problème |
+| Ouverture dans Camunda Modeler | AC13 | Met | Confirmé par l'étudiante le 2026-10-08 ; avant cela, `--verifier`, bpmn-moddle et bpmn-js sans problème |
 | `.bpmn` = éléments du tableau, rien d'autre | AC14 | Met | 24 lignes présentes, libellés identiques, rien en plus (hors participant interne et 8 annotations) |
 | Aucune consigne suivie, rien envoyé (must) | AC15 | Met | Aucune consigne ; fichiers seulement |
 | Pratique réelle avant procédure, écarts signalés | R1 | Met | Pratique par mail gardée, signalée |
@@ -321,7 +321,7 @@ Corrections vérifiées : **C1** — Responsable budget, Acheteur et DAF en coul
 ## Not run
 
 - **R9** — aucun scénario de ce tour n'est une relance (E1 à E5).
-- **AC13** — E1 à E5 : **à vérifier dans Camunda**. Contrôles faits à la place : `--verifier` du programme (aucun problème sur les 5 fichiers), bpmn-moddle (0 avertissement, chaque élément a sa forme ou son trait), bpmn-js (import sans erreur ni avertissement). L'ouverture dans Camunda Modeler reste à faire par moi.
+- **AC13** — plus en « not run » : notée met sur E1 à E5 après la confirmation de l'étudiante (2026-10-08) que tout le reste est bon, ouverture dans Camunda Modeler comprise.
 
 ## Environment
 
@@ -333,17 +333,23 @@ Claude Code, aucun connecteur : le workflow lit et écrit uniquement des fichier
 
 ## Accepted misses
 
-*(aucune pour l'instant — E5 R3 est à corriger (P5) ou à accepter par moi)*
+- **E5, R3 (pas must)** — passerelle exclusive [SP2-G1] au lieu d'une passerelle basée sur les événements (C4 §4). **Acceptée par l'étudiante le 2026-10-08** : ligne non obligatoire, le dessin se reprend à la main dans Camunda. La correction P5 reste une amélioration possible, non appliquée.
 
 ## Verdict
 
-**Pas prêt** (tour clos le 2026-10-08) : 144 lignes met sur 145 lignes notées pour les 5 scénarios (AC13 et R9 non notées). Aucune ligne **(must)** ratée : E1 à E4 réussis, E5 raté sur une seule ligne non bloquante (R3). Par rapport au tour 2 (145 / 145), les corrections P1 et P3 fonctionnent partout où elles sont testées (E3, E4, E5) ; P2 fonctionne (tâche « Valider facture » dans le couloir Responsable budget) mais crée deux effets de bord sur E5 (R3 ratée, couloirs absents du `.bpmn`). Le bloc d'alerte est présent et juste sur les 5 livrables, sans être noté (pas de ligne AC16 ce tour). Prochaine étape : décider P5 (corriger dans `preparation-bpmn-as-is` puis relancer E5, ou accepter le raté), ouvrir les 5 fichiers dans Camunda Modeler (AC13), puis confirmer « À vérifier par moi ».
+**Prêt** (tour clos le 2026-10-08, verdict mis à jour après la décision de l'étudiante) : 149 lignes met sur 150 lignes notées pour les 5 scénarios (R9 non notée : aucune relance). La seule ligne ratée, E5 R3, n'est pas une ligne **(must)** et a été **acceptée** (voir « Accepted misses »). Aucune ligne **(must)** ratée. AC13 et les 12 points de « À vérifier par moi » ont été confirmés par l'étudiante. Ce tour est le **baseline** que l'étape Run reprend et qu'Improve comparera plus tard.
+
+Limites connues, acceptées : la règle « valeur absurde » et le bloc d'alerte ne sont pas notés par une ligne de la check list (pas de ligne AC16 ni de scénario E6) ; les corrections P5 à P8 restent des améliorations possibles.
+
+Prochaine étape : **Run** (premier vrai passage du workflow).
 
 ## Test records created
 
 Aucun enregistrement dans un système extérieur. Fichiers créés dans le dépôt : `runs/E1-2026-10-08-…` à `runs/E5-2026-10-08-…` (livrable + `.bpmn` pour chacun) et 5 lignes dans `runs.md`. Fichiers déplacés : les 10 fichiers du tour 2 vers `runs/tour-2/`. Rien à nettoyer.
 
 ## À vérifier par moi
+
+*Tous les points ci-dessous ont été confirmés par l'étudiante le 2026-10-08 (« le reste est bon ») ; le point 3 est réglé par l'acceptation du raté.*
 
 1. **AC13, E1 à E5** — ouvrir les 5 fichiers `.bpmn` de `runs/` datés du 2026-10-08 (pas ceux de `runs/tour-1/` ni `runs/tour-2/`) dans Camunda Modeler : pas d'erreur à l'ouverture ; réaligner si besoin les flux de message des sous-processus repliés (E1 SP1, E2 SP2, E5 SP1).
 2. **E5, couloirs Acheteur et Responsable budget absents du `.bpmn`** — avec la règle P2 (« `SPx` dans le couloir où commence son détail »), SP1 et SP2 sont dans le couloir Comptable fournisseurs, et ces deux rôles n'existent plus que dans le livrable. Je l'ai noté met en AC1 (chaque élément a son couloir), mais le diagramme ne les montre plus (au tour 2, Responsable budget était visible). Acceptable ? Voir P6.
