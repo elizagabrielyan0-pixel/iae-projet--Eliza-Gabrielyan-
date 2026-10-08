@@ -1,0 +1,71 @@
+<section id="s2-workflow" data-transition="fade" style="background:#F7F6F2;color:#3B4458;font-family:'IBM Plex Sans', Arial, sans-serif;padding:80px 96px 140px;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2457C5">2 / 7 · Le workflow déconstruit</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:52px;font-weight:600;line-height:1.1;color:#14213D">6 étapes fixes, et rien n'est jamais inventé</h2>
+</div>
+<p style="font-size:24px;color:#14213D;background:#F8E3D3;padding:10px 20px;border-radius:10px"><b>Avant — moi :</b> noms remplacés par les fonctions · contrat client vérifié · je lance le workflow</p>
+<div style="display:flex;align-items:center;gap:8px">
+<div style="flex:1;align-self:stretch;display:flex;flex-direction:column;gap:6px;background:#FDFCFA;border:1px solid #D5DBE5;border-radius:12px;padding:16px">
+<p style="font-size:24px;font-weight:600;color:#14213D"><span style="color:#2457C5">1</span> Charger les conventions</p>
+<p style="font-size:24px">→ C4 + modèles C5, C6</p>
+</div>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:16px"></x-shape>
+<div style="flex:1;align-self:stretch;display:flex;flex-direction:column;gap:6px;background:#FDFCFA;border:1px solid #D5DBE5;border-radius:12px;padding:16px">
+<p style="font-size:24px;font-weight:600;color:#14213D"><span style="color:#2457C5">2</span> Consolider les sources</p>
+<p style="font-size:24px">→ origine de chaque info</p>
+</div>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:16px"></x-shape>
+<div style="flex:1;align-self:stretch;display:flex;flex-direction:column;gap:6px;background:#FDFCFA;border:1px solid #D5DBE5;border-radius:12px;padding:16px">
+<p style="font-size:24px;font-weight:600;color:#14213D"><span style="color:#2457C5">3</span> Reconstruire le processus</p>
+<p style="font-size:24px">→ tableau, source + statut</p>
+</div>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:16px"></x-shape>
+<div style="flex:1;align-self:stretch;display:flex;flex-direction:column;gap:6px;background:#FDFCFA;border:1px solid #D5DBE5;border-radius:12px;padding:16px">
+<p style="font-size:24px;font-weight:600;color:#14213D"><span style="color:#2457C5">4</span> Contrôler les zones floues</p>
+<p style="font-size:24px">→ questions Qx</p>
+</div>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:16px"></x-shape>
+<div style="flex:1;align-self:stretch;display:flex;flex-direction:column;gap:6px;background:#FDFCFA;border:1px solid #D5DBE5;border-radius:12px;padding:16px">
+<p style="font-size:24px;font-weight:600;color:#14213D"><span style="color:#2457C5">5</span> Assembler le livrable</p>
+<p style="font-size:24px">→ 1 document</p>
+</div>
+<x-shape kind="arrow-right" style="background:#9AA8BF;width:28px;height:16px"></x-shape>
+<div style="flex:1;align-self:stretch;display:flex;flex-direction:column;gap:6px;background:#DCE6F8;border:1px solid #B7C8EA;border-radius:12px;padding:16px">
+<p style="font-size:24px;font-weight:600;color:#14213D"><span style="color:#2457C5">6</span> Générer le .bpmn</p>
+<p style="font-size:24px">→ s'ouvre dans Camunda</p>
+</div>
+</div>
+<p style="font-size:24px;color:#14213D;background:#F8E3D3;padding:10px 20px;border-radius:10px"><b>Après — moi :</b> je relis tout · questions au client · je finalise dans Camunda · je relance avec ses réponses (R9)</p>
+<div style="display:flex;gap:24px">
+<div style="width:700px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:26px;font-weight:600;color:#14213D">Décisions : 4 statuts sur chaque élément</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<p style="font-size:24px;color:#14213D;background:#DCE6F8;padding:8px 14px;border-radius:8px"><b>Confirmé</b> : dit clairement</p>
+<p style="font-size:24px;color:#14213D;background:#E9ECF1;padding:8px 14px;border-radius:8px"><b>Non confirmé</b> : « je crois »</p>
+<p style="font-size:24px;color:#14213D;background:#E9ECF1;padding:8px 14px;border-radius:8px"><b>Supposé</b> : structure seule</p>
+<p style="font-size:24px;color:#14213D;background:#F8E3D3;padding:8px 14px;border-radius:8px"><b>À préciser</b> : trou → question</p>
+</div>
+<p style="font-size:24px">R1 : pratique &gt; procédure · contradiction → aucune version retenue · <b>actions externes : aucune</b></p>
+</div>
+<table style="flex:1;font-size:24px;color:#14213D">
+<tr><th style="width:46%">Cas d'échec</th><th style="width:54%">Réponse prévue</th></tr>
+<tr><td>Notes d'atelier absentes</td><td>s'arrête et les demande</td></tr>
+<tr style="background:#F8E3D3"><td>Consigne cachée dans un PDF</td><td>ignorée, signalée, rien envoyé</td></tr>
+<tr><td>Seuil ou délai manquant</td><td>« À préciser — voir Qx »</td></tr>
+<tr><td>Valeur absurde, nom oublié</td><td>jamais corrigée ; nom remplacé</td></tr>
+<tr><td>PDF illisible, C4 absente</td><td>fait au mieux + signalé (R8)</td></tr>
+</table>
+</div>
+<div style="position:absolute;left:96px;right:96px;bottom:48px;display:flex;justify-content:space-between;align-items:center">
+<p style="font-size:24px;color:#4A5568"><b>Preuve →</b> <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/requirements.md">requirements.md</a> (Steps, Rules &amp; Edge Cases, R1–R9) · <a href="https://github.com/elizagabrielyan0-pixel/iae-projet--Eliza-Gabrielyan-/blob/main/outputs/preparation-bpmn-as-is/revue-requirements.md">revue-requirements.md</a></p>
+<p style="font-size:24px;color:#4A5568">2 / 7</p>
+</div>
+<aside>Points à dire :
+- Workflow « step-driven » : je sais comment le travail se fait, donc 6 étapes fixes.
+- 1 : l'IA lit mes conventions (C4) et deux modèles BPMN (C5, C6) — étape ajoutée, car ces règles étaient seulement dans ma tête. 2 : elle regroupe les sources en gardant l'origine de chaque info. 3 : elle fait le tableau, une ligne par élément BPMN, avec source et statut. 4 : elle transforme tout ce qui manque ou se contredit en questions pour le client. 5 : un seul document. 6 : le fichier .bpmn.
+- Décisions : chaque élément a un statut. « Supposé » est réservé à la structure (ex. la passerelle qui referme deux branches), jamais à un seuil ou un acteur.
+- Ma règle la plus importante : l'IA ne comble jamais un trou (R4). Si deux personnes se contredisent, elle ne choisit pas, elle pose la question.
+- Actions externes : aucune. Le workflow ne fait que produire des fichiers.
+- Cas d'échec : un seul arrêt (notes absentes) ; sinon faire au mieux et signaler.
+- Plusieurs règles viennent de la revue de mes requirements (statuts ajoutés, trous « À préciser »).</aside>
+</section>
