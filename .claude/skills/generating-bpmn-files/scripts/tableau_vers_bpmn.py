@@ -59,10 +59,16 @@ def lire_livrable(chemin):
         if len(cells) < 8 or cells[0] in ("ID", "") or set(cells[0]) <= set("-: "):
             continue
         lignes.append(dict(zip(["id", "pc", "label", "type", "cond", "next", "source", "statut"], cells[:8])))
-    questions = {}
-    for q in re.finditer(r"^\s*-?\s*(Q\d+)\s*—\s*((?:\[[^\]]+\]\s*)+)", texte, re.M):
+    # Pour chaque ID : la première question « Bloquant pour la modélisation » qui le cite,
+    # sinon la première question qui le cite.
+    questions, bloquantes = {}, {}
+    for q in re.finditer(r"^\s*-?\s*(Q\d+)\s*—\s*((?:\[[^\]]+\]\s*)+)—?\s*(.*)$", texte, re.M):
+        bloquante = q.group(3).lower().startswith("bloquant")
         for rid in re.findall(r"\[([^\]]+)\]", q.group(2)):
             questions.setdefault(rid.strip(), q.group(1))
+            if bloquante:
+                bloquantes.setdefault(rid.strip(), q.group(1))
+    questions.update(bloquantes)
     return lignes, questions
 
 
