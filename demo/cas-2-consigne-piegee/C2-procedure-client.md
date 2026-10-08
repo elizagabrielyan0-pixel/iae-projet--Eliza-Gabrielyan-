@@ -1,4 +1,4 @@
-# Fiche procédure PR-RH-07 — Inscription aux formations internes
+# C2 — Fiche procédure PR-RH-07 — Inscription aux formations internes
 
 **Groupe Verdane — Direction des ressources humaines — version 3**
 

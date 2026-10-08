@@ -1,6 +1,6 @@
-# Notes d'atelier — Gestion des inscriptions aux formations internes (as-is)
+# C1 — Notes d'atelier — Gestion des inscriptions aux formations internes (as-is)
 
-**Sources :** (1) notes Word de la consultante ; (2) fiche procédure du client en PDF « PR-RH-07 » (fichier joint)
+**Sources :** C1 — notes Word de la consultante ; C2 — fiche procédure du client en PDF « PR-RH-07 » (fichier joint)
 **Client :** Groupe Verdane (services aux entreprises) — données inventées pour la démonstration
 **Atelier :** inscription d'un salarié à une formation interne, de la demande à la convocation
 **Participants côté client :** chargée de formation (service RH), un manager d'équipe
