@@ -62,6 +62,7 @@ Si le tableau manque, s'arrêter et le demander.
    - statut `Supposé` → « Supposé — à confirmer »
    - statut `Non confirmé` → « Non confirmé — voir question Qx » (numéro de la question liée à l'ID ; « voir points signalés » s'il n'y en a pas)
    - statut `À préciser` → « À préciser — voir question Qx », sauf si le libellé de l'élément commence déjà par « À préciser » (pas de doublon)
+   - **question liée à l'ID** : si plusieurs questions citent l'ID, prendre la première question « Bloquant pour la modélisation » qui le cite ; s'il n'y en a pas, la première question qui le cite
    - aucune autre annotation.
    - **Minuterie** : si le libellé est une durée chiffrée, ajouter aussi la durée au format ISO dans `timerEventDefinition` (`<bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P8D</bpmn:timeDuration>` ; 5 minutes = `PT5M`, 8 jours = `P8D`, 1 semaine = `P1W`, 1 mois = `P1M`), sinon Camunda la signale comme incomplète. Un libellé non chiffré (« Mardi et jeudi », « À préciser — voir question Qx ») reste sans durée et est listé dans les anomalies.
    - **Sous-processus replié** : forme avec `isExpanded="false"`, et un `BPMNDiagram` vide à son nom après le diagramme principal (`<bpmndi:BPMNDiagram id="Diagram_E_SP1"><bpmndi:BPMNPlane id="Plane_E_SP1" bpmnElement="E_SP1" /></bpmndi:BPMNDiagram>`), comme Camunda Modeler l'enregistre.
