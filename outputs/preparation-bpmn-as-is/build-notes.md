@@ -48,3 +48,9 @@ Après la comparaison (`comparaison.md`), mon skill garde ses points forts (desc
 - notes de simulation `data/simulation-*` acceptées comme données de test.
 
 `build-preparation-bpmn-as-is` n'a pas été modifié ni supprimé.
+
+## Corrections après le tour de test 1 (2026-10-08)
+- S1 : corrections C1 à C4 de `test-results.md` (rôles internes en couloirs, colonne des participants externes, trous « À préciser » visibles dans le `.bpmn`, règle des questions bloquantes).
+- S2 : programme fixe `.claude/skills/generating-bpmn-files/scripts/tableau_vers_bpmn.py` (Python standard, aucune installation). Il lit le livrable, écrit le `.bpmn` et le vérifie ; S1 l'appelle à l'étape 6 quand l'outil peut lancer Python. La méthode à la main reste pour l'outil IA KPMG.
+- Ce que le programme corrige par rapport au tour 1 : flux qui traversaient des formes (E1, E2, E5), flux de message et noms de messages superposés (E2, E5), minuteries sans durée pour Camunda, éléments « À préciser » sans annotation.
+- Essai sur les 5 livrables du tour 1 : 0 anomalie de dessin, fichiers ouverts sans erreur ni avertissement par bpmn-js (moteur d'affichage de Camunda Modeler). Seule anomalie signalée : la minuterie « Mardi et jeudi » d'E5, sans durée chiffrée.
