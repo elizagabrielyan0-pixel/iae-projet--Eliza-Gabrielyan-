@@ -18,6 +18,15 @@ Il ne réfléchit pas au processus : il recopie le tableau. Il n'ajoute, ne reti
 
 Si le tableau manque, s'arrêter et le demander.
 
+## Méthode à utiliser
+- **Si l'outil peut lancer Python** (Claude Code, par exemple) : toujours utiliser le programme fourni, qui applique les étapes 1 à 6 ci-dessous de la même façon à chaque fois :
+  `python3 .claude/skills/generating-bpmn-files/scripts/tableau_vers_bpmn.py <livrable.md> <fichier.bpmn>`
+  Il lit le tableau principal du livrable (section « 1. Tableau du processus », sans les tableaux « Détail de SPx ») et les questions Qx, écrit le fichier, puis le vérifie. Il affiche le contenu (nombre d'éléments, de flux, d'annotations) et la liste « Anomalies du tableau non corrigées et points à reprendre dans Camunda » : la recopier telle quelle dans la sortie.
+  - Code 0 : fichier propre. Code 1 : fichier produit, avec des anomalies listées. Code 2 : rien n'a été produit (tableau introuvable) ; dans ce cas, passer à la méthode à la main.
+  - Ne jamais retoucher à la main le fichier produit par le programme. Si le tableau est faux, c'est le tableau qui est corrigé (par le skill qui l'a écrit), puis le programme est relancé.
+  - Pour vérifier un fichier `.bpmn` existant : `python3 .claude/skills/generating-bpmn-files/scripts/tableau_vers_bpmn.py --verifier <fichier.bpmn>`.
+- **Sinon** (outil IA KPMG sans exécution de code) : suivre les étapes 1 à 6 à la main, puis le plan de secours si l'outil ne peut pas créer de fichier.
+
 ## Étapes
 1. **Lire le tableau** : relever les participants, les couloirs de chaque participant, les éléments et leurs liens. Façon d'écrire attendue (celle du skill `preparation-bpmn-as-is`) :
    - « Participant / Couloir » = `Participant interne / Couloir` ;
@@ -54,22 +63,27 @@ Si le tableau manque, s'arrêter et le demander.
    - statut `Non confirmé` → « Non confirmé — voir question Qx » (numéro de la question liée à l'ID ; « voir points signalés » s'il n'y en a pas)
    - statut `À préciser` → « À préciser — voir question Qx », sauf si le libellé de l'élément commence déjà par « À préciser » (pas de doublon)
    - aucune autre annotation.
+   - **Minuterie** : si le libellé est une durée chiffrée, ajouter aussi la durée au format ISO dans `timerEventDefinition` (`<bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P8D</bpmn:timeDuration>` ; 5 minutes = `PT5M`, 8 jours = `P8D`, 1 semaine = `P1W`, 1 mois = `P1M`), sinon Camunda la signale comme incomplète. Un libellé non chiffré (« Mardi et jeudi », « À préciser — voir question Qx ») reste sans durée et est listé dans les anomalies.
+   - **Sous-processus replié** : forme avec `isExpanded="false"`, et un `BPMNDiagram` vide à son nom après le diagramme principal (`<bpmndi:BPMNDiagram id="Diagram_E_SP1"><bpmndi:BPMNPlane id="Plane_E_SP1" bpmnElement="E_SP1" /></bpmndi:BPMNDiagram>`), comme Camunda Modeler l'enregistre.
 
 5. **Dessiner (partie `bpmndi`)** : une forme `BPMNShape` par participant, couloir, élément et annotation ; une `BPMNEdge` par flux et par association. Règles de mise en page :
-   - lecture de gauche à droite ; chaque élément est placé dans une colonne selon son rang depuis le début (début = colonne 0, suivant = colonne 1…) ; colonnes espacées de 150 ;
-   - un couloir = une rangée horizontale de 150 de haut (plus haute si plusieurs éléments partagent la même colonne dans le couloir : les empiler verticalement) ;
+   - lecture de gauche à droite ; chaque élément est placé dans une colonne selon son rang le plus long depuis le début (début = colonne 0, suivant = colonne 1…) ; colonnes espacées de 180 ; un « Lien réception » se place juste avant son élément suivant ;
+   - un couloir = une rangée de 150 de haut par élément empilé (190 si le couloir porte des annotations) : quand plusieurs éléments du couloir sont dans la même colonne, les empiler verticalement ;
    - participant interne : bande d'en-tête de 30 à gauche ; ses couloirs sont empilés sans espace ;
-   - participants externes : bande de 100 de haut, au-dessus du participant interne (espace de 50) ;
-   - tailles : tâche et sous-processus 100 × 80 ; événement 36 × 36 ; passerelle 50 × 50 ; annotation 120 × 50, au-dessus de son élément ;
-   - chaque élément est centré verticalement dans son couloir ; aucune forme ne se superpose ;
-   - flux : points de passage (`di:waypoint`) du bord droit de la source au bord gauche de la cible, avec un coude à angle droit si les hauteurs diffèrent ; flux de message vertical entre l'élément et le bord du participant externe ;
+   - participants externes : bande de 100 de haut ; le 1er au-dessus du participant interne, le 2e au-dessous, puis en alternance (espace de 50), pour que les flux de message ne traversent pas un autre participant ;
+   - tailles : tâche et sous-processus 100 × 80 ; événement 36 × 36 ; passerelle 50 × 50 ; annotation 120 × 45, **sous** son élément, dans la même colonne ;
+   - aucune forme ne se superpose, et aucune ne sort de son couloir ;
+   - flux de séquence : uniquement des segments horizontaux et verticaux. Ordre d'essai : ligne droite si même hauteur ; sinon coude dans l'espace libre entre deux colonnes ; sinon passage par le haut ou le bas du couloir. Un flux ne traverse **jamais** une forme ni une annotation, et ne se pose jamais sur un autre trait ;
+   - flux de message : vertical depuis le haut (participant au-dessus) ou le bas (participant au-dessous) de l'élément ; s'il traverserait une forme, il longe le haut du couloir jusqu'à l'espace libre entre deux colonnes, puis monte ou descend. Plusieurs messages sur un même élément partent de points décalés (20 sur une tâche, 10 sur un événement). Le nom de chaque message (`BPMNLabel`, 90 × 28) est placé à côté de son trait, à un endroit qui ne touche ni forme, ni annotation, ni autre nom ;
    - sur les passerelles exclusives : `isMarkerVisible="true"` ; sur les participants et couloirs : `isHorizontal="true"`.
 
 6. **Contrôle final avant de rendre le fichier** :
    - chaque ID du tableau est présent une seule fois dans le fichier, et aucun élément en plus (hors annotations) ;
    - chaque `sourceRef`, `targetRef`, `flowNodeRef`, `processRef` et `bpmnElement` pointe vers un `id` qui existe ;
    - tous les `id` sont uniques ; chaque élément du modèle a sa forme ou son trait dans le dessin ;
-   - le XML est bien formé (balises fermées, caractères `&`, `<`, `"` échappés dans les libellés).
+   - le XML est bien formé (balises fermées, caractères `&`, `<`, `"` échappés dans les libellés) ;
+   - dessin : aucune forme superposée ni hors de son couloir, aucun flux qui traverse une forme, aucun trait posé sur un autre, chaque flux part de sa source et arrive sur sa cible ;
+   - si un tracé propre est impossible, le dire dans les anomalies (« à réaligner dans Camunda ») au lieu de le laisser passer.
 
 ## Quand le tableau a un problème
 - Type BPMN inconnu, élément suivant qui n'existe pas, lien vers un autre participant noté comme flux de séquence → **ne pas corriger en silence** : produire tout le reste et lister l'anomalie après le fichier (« Anomalies du tableau non corrigées »).
