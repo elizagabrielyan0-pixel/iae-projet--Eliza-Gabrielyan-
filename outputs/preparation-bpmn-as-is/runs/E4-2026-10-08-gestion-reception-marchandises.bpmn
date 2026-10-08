@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.27.0">
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="Participant_P1" name="Transporteur" processRef="Process_P1" />
+    <bpmn:participant id="Participant_P2" name="Fournisseur" processRef="Process_P2" />
+    <bpmn:participant id="Participant_Interne" name="Gestion réception marchandises" processRef="Process_Interne" />
+    <bpmn:messageFlow id="MsgFlow_1_P1_EV1" name="Livraison" sourceRef="Participant_P1" targetRef="E_EV1" />
+    <bpmn:messageFlow id="MsgFlow_2_SP1_P2" name="Écart de livraison" sourceRef="E_SP1" targetRef="Participant_P2" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_P1" isExecutable="false" />
+  <bpmn:process id="Process_P2" isExecutable="false" />
+  <bpmn:process id="Process_Interne" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Magasinier_1" name="Magasinier">
+        <bpmn:flowNodeRef>E_EV1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_G1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_F1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_T5</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Gestionnaire_des_stocks_2" name="Gestionnaire des stocks">
+        <bpmn:flowNodeRef>E_SP1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_F2</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="E_EV1" name="Livraison">
+      <bpmn:outgoing>Flow_EV1_T1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MED_EV1" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="E_T1" name="Contrôler bon de livraison avec commande">
+      <bpmn:incoming>Flow_EV1_T1</bpmn:incoming>
+      <bpmn:outgoing>Flow_T1_G1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="E_G1" name="Livraison conforme ?">
+      <bpmn:incoming>Flow_T1_G1</bpmn:incoming>
+      <bpmn:outgoing>Flow_G1_T2</bpmn:outgoing>
+      <bpmn:outgoing>Flow_G1_T4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="E_T2" name="Enregistrer entrée en stock dans SAP">
+      <bpmn:incoming>Flow_G1_T2</bpmn:incoming>
+      <bpmn:outgoing>Flow_T2_T3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:manualTask id="E_T3" name="Ranger marchandise">
+      <bpmn:incoming>Flow_T2_T3</bpmn:incoming>
+      <bpmn:outgoing>Flow_T3_F1</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:endEvent id="E_F1" name="Marchandise rangée">
+      <bpmn:incoming>Flow_T3_F1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:manualTask id="E_T4" name="Refuser partie non conforme">
+      <bpmn:incoming>Flow_G1_T4</bpmn:incoming>
+      <bpmn:outgoing>Flow_T4_T5</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:userTask id="E_T5" name="Signaler écart au gestionnaire des stocks">
+      <bpmn:incoming>Flow_T4_T5</bpmn:incoming>
+      <bpmn:outgoing>Flow_T5_SP1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:subProcess id="E_SP1" name="Gestion litige">
+      <bpmn:incoming>Flow_T5_SP1</bpmn:incoming>
+      <bpmn:outgoing>Flow_SP1_F2</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:endEvent id="E_F2" name="À préciser — voir question Q7">
+      <bpmn:incoming>Flow_SP1_F2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_EV1_T1" sourceRef="E_EV1" targetRef="E_T1" />
+    <bpmn:sequenceFlow id="Flow_T1_G1" sourceRef="E_T1" targetRef="E_G1" />
+    <bpmn:sequenceFlow id="Flow_G1_T2" name="OUI" sourceRef="E_G1" targetRef="E_T2" />
+    <bpmn:sequenceFlow id="Flow_G1_T4" name="NON" sourceRef="E_G1" targetRef="E_T4" />
+    <bpmn:sequenceFlow id="Flow_T2_T3" sourceRef="E_T2" targetRef="E_T3" />
+    <bpmn:sequenceFlow id="Flow_T3_F1" sourceRef="E_T3" targetRef="E_F1" />
+    <bpmn:sequenceFlow id="Flow_T4_T5" sourceRef="E_T4" targetRef="E_T5" />
+    <bpmn:sequenceFlow id="Flow_T5_SP1" sourceRef="E_T5" targetRef="E_SP1" />
+    <bpmn:sequenceFlow id="Flow_SP1_F2" sourceRef="E_SP1" targetRef="E_F2" />
+    <bpmn:textAnnotation id="Annot_F1"><bpmn:text>Supposé — à confirmer</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_F1" sourceRef="E_F1" targetRef="Annot_F1" />
+    <bpmn:textAnnotation id="Annot_T5"><bpmn:text>Non confirmé — voir question Q6</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_T5" sourceRef="E_T5" targetRef="Annot_T5" />
+    <bpmn:textAnnotation id="Annot_SP1"><bpmn:text>À préciser — voir question Q9</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="Assoc_SP1" sourceRef="E_SP1" targetRef="Annot_SP1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_1">
+    <bpmndi:BPMNPlane id="Plane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="Participant_P1_di" bpmnElement="Participant_P1" isHorizontal="true"><dc:Bounds x="150" y="60" width="1350" height="100" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_P2_di" bpmnElement="Participant_P2" isHorizontal="true"><dc:Bounds x="150" y="830" width="1350" height="100" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_Interne_di" bpmnElement="Participant_Interne" isHorizontal="true"><dc:Bounds x="150" y="210" width="1350" height="570" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Magasinier_1_di" bpmnElement="Lane_Magasinier_1" isHorizontal="true"><dc:Bounds x="180" y="210" width="1320" height="380" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Gestionnaire_des_stocks_2_di" bpmnElement="Lane_Gestionnaire_des_stocks_2" isHorizontal="true"><dc:Bounds x="180" y="590" width="1320" height="190" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_EV1_di" bpmnElement="E_EV1"><dc:Bounds x="292" y="262" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T1_di" bpmnElement="E_T1"><dc:Bounds x="440" y="240" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_G1_di" bpmnElement="E_G1" isMarkerVisible="true"><dc:Bounds x="645" y="255" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T2_di" bpmnElement="E_T2"><dc:Bounds x="800" y="240" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T3_di" bpmnElement="E_T3"><dc:Bounds x="980" y="240" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_F1_di" bpmnElement="E_F1"><dc:Bounds x="1192" y="262" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T4_di" bpmnElement="E_T4"><dc:Bounds x="800" y="430" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_T5_di" bpmnElement="E_T5"><dc:Bounds x="980" y="430" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_SP1_di" bpmnElement="E_SP1" isExpanded="false"><dc:Bounds x="1160" y="620" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_F2_di" bpmnElement="E_F2"><dc:Bounds x="1372" y="642" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_F1_di" bpmnElement="Annot_F1"><dc:Bounds x="1150" y="335" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_T5_di" bpmnElement="Annot_T5"><dc:Bounds x="970" y="525" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annot_SP1_di" bpmnElement="Annot_SP1"><dc:Bounds x="1150" y="715" width="120" height="45" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_EV1_T1_di" bpmnElement="Flow_EV1_T1"><di:waypoint x="328" y="280" /><di:waypoint x="440" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T1_G1_di" bpmnElement="Flow_T1_G1"><di:waypoint x="540" y="280" /><di:waypoint x="645" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G1_T2_di" bpmnElement="Flow_G1_T2"><di:waypoint x="695" y="280" /><di:waypoint x="800" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_G1_T4_di" bpmnElement="Flow_G1_T4"><di:waypoint x="695" y="280" /><di:waypoint x="760" y="280" /><di:waypoint x="760" y="470" /><di:waypoint x="800" y="470" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T2_T3_di" bpmnElement="Flow_T2_T3"><di:waypoint x="900" y="280" /><di:waypoint x="980" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T3_F1_di" bpmnElement="Flow_T3_F1"><di:waypoint x="1080" y="280" /><di:waypoint x="1192" y="280" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T4_T5_di" bpmnElement="Flow_T4_T5"><di:waypoint x="900" y="470" /><di:waypoint x="980" y="470" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_T5_SP1_di" bpmnElement="Flow_T5_SP1"><di:waypoint x="1080" y="470" /><di:waypoint x="1120" y="470" /><di:waypoint x="1120" y="660" /><di:waypoint x="1160" y="660" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_SP1_F2_di" bpmnElement="Flow_SP1_F2"><di:waypoint x="1260" y="660" /><di:waypoint x="1372" y="660" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_F1_di" bpmnElement="Assoc_F1"><di:waypoint x="1210" y="298" /><di:waypoint x="1210" y="335" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_T5_di" bpmnElement="Assoc_T5"><di:waypoint x="1030" y="510" /><di:waypoint x="1030" y="525" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_SP1_di" bpmnElement="Assoc_SP1"><di:waypoint x="1210" y="700" /><di:waypoint x="1210" y="715" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_1_P1_EV1_di" bpmnElement="MsgFlow_1_P1_EV1"><di:waypoint x="310" y="160" /><di:waypoint x="310" y="262" /><bpmndi:BPMNLabel><dc:Bounds x="316" y="197" width="90" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_2_SP1_P2_di" bpmnElement="MsgFlow_2_SP1_P2"><di:waypoint x="1210" y="620" /><di:waypoint x="1210" y="598" /><di:waypoint x="1300" y="598" /><di:waypoint x="1300" y="830" /><bpmndi:BPMNLabel><dc:Bounds x="1306" y="700" width="90" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="Diagram_E_SP1"><bpmndi:BPMNPlane id="Plane_E_SP1" bpmnElement="E_SP1" /></bpmndi:BPMNDiagram>
+</bpmn:definitions>
