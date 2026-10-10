@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  id="Definitions_Emprunt"
+                  targetNamespace="http://bpmn.io/schema/bpmn"
+                  exporter="Camunda Modeler" exporterVersion="5.0.0">
+
+  <bpmn:collaboration id="Collab_Emprunt">
+    <bpmn:participant id="Pool_Bibliotheque" name="Bibliothèque — Validation d'un emprunt" processRef="Process_ValidationEmprunt" />
+  </bpmn:collaboration>
+
+  <bpmn:process id="Process_ValidationEmprunt" name="Validation d'un emprunt" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Adherent" name="Adhérent">
+        <bpmn:flowNodeRef>Start_Demande</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Presenter</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Bibliothecaire" name="Bibliothécaire">
+        <bpmn:flowNodeRef>Task_Cotisation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Cotisation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Retard</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Retard</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Compter</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Max</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Enregistrer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Valide</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Refus</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Refus</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Refuse</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+
+    <bpmn:startEvent id="Start_Demande" name="Demande d'emprunt">
+      <bpmn:outgoing>F1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_Presenter" name="Présenter sa carte et les ouvrages">
+      <bpmn:incoming>F1</bpmn:incoming>
+      <bpmn:outgoing>F2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Cotisation" name="Vérifier la cotisation">
+      <bpmn:incoming>F2</bpmn:incoming>
+      <bpmn:outgoing>F3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="GW_Cotisation" name="Cotisation à jour ?">
+      <bpmn:incoming>F3</bpmn:incoming>
+      <bpmn:outgoing>F4_Oui</bpmn:outgoing>
+      <bpmn:outgoing>F4_Non</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Retard" name="Vérifier les prêts en retard">
+      <bpmn:incoming>F4_Oui</bpmn:incoming>
+      <bpmn:outgoing>F5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="GW_Retard" name="Prêt en retard ?">
+      <bpmn:incoming>F5</bpmn:incoming>
+      <bpmn:outgoing>F6_Non</bpmn:outgoing>
+      <bpmn:outgoing>F6_Oui</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Compter" name="Compter les emprunts en cours">
+      <bpmn:incoming>F6_Non</bpmn:incoming>
+      <bpmn:outgoing>F7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="GW_Max" name="Moins de 5 emprunts en cours ?">
+      <bpmn:incoming>F7</bpmn:incoming>
+      <bpmn:outgoing>F8_Oui</bpmn:outgoing>
+      <bpmn:outgoing>F8_Non</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Enregistrer" name="Enregistrer l'emprunt">
+      <bpmn:incoming>F8_Oui</bpmn:incoming>
+      <bpmn:outgoing>F9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_Valide" name="Emprunt validé">
+      <bpmn:incoming>F9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="GW_Refus">
+      <bpmn:incoming>F4_Non</bpmn:incoming>
+      <bpmn:incoming>F6_Oui</bpmn:incoming>
+      <bpmn:incoming>F8_Non</bpmn:incoming>
+      <bpmn:outgoing>F10</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Refus" name="Informer l'adhérent du refus">
+      <bpmn:incoming>F10</bpmn:incoming>
+      <bpmn:outgoing>F11</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_Refuse" name="Emprunt refusé">
+      <bpmn:incoming>F11</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:sequenceFlow id="F1" sourceRef="Start_Demande" targetRef="Task_Presenter" />
+    <bpmn:sequenceFlow id="F2" sourceRef="Task_Presenter" targetRef="Task_Cotisation" />
+    <bpmn:sequenceFlow id="F3" sourceRef="Task_Cotisation" targetRef="GW_Cotisation" />
+    <bpmn:sequenceFlow id="F4_Oui" name="Oui" sourceRef="GW_Cotisation" targetRef="Task_Retard" />
+    <bpmn:sequenceFlow id="F4_Non" name="Non" sourceRef="GW_Cotisation" targetRef="GW_Refus" />
+    <bpmn:sequenceFlow id="F5" sourceRef="Task_Retard" targetRef="GW_Retard" />
+    <bpmn:sequenceFlow id="F6_Non" name="Non" sourceRef="GW_Retard" targetRef="Task_Compter" />
+    <bpmn:sequenceFlow id="F6_Oui" name="Oui" sourceRef="GW_Retard" targetRef="GW_Refus" />
+    <bpmn:sequenceFlow id="F7" sourceRef="Task_Compter" targetRef="GW_Max" />
+    <bpmn:sequenceFlow id="F8_Oui" name="Oui" sourceRef="GW_Max" targetRef="Task_Enregistrer" />
+    <bpmn:sequenceFlow id="F8_Non" name="Non (5 atteint)" sourceRef="GW_Max" targetRef="GW_Refus" />
+    <bpmn:sequenceFlow id="F9" sourceRef="Task_Enregistrer" targetRef="End_Valide" />
+    <bpmn:sequenceFlow id="F10" sourceRef="GW_Refus" targetRef="Task_Refus" />
+    <bpmn:sequenceFlow id="F11" sourceRef="Task_Refus" targetRef="End_Refuse" />
+  </bpmn:process>
+
+  <bpmndi:BPMNDiagram id="Diagram_1">
+    <bpmndi:BPMNPlane id="Plane_1" bpmnElement="Collab_Emprunt">
+      <bpmndi:BPMNShape id="Pool_di" bpmnElement="Pool_Bibliotheque" isHorizontal="true">
+        <dc:Bounds x="130" y="80" width="1260" height="470" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Adherent_di" bpmnElement="Lane_Adherent" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1230" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Bibliothecaire_di" bpmnElement="Lane_Bibliothecaire" isHorizontal="true">
+        <dc:Bounds x="160" y="230" width="1230" height="320" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Start_Demande_di" bpmnElement="Start_Demande">
+        <dc:Bounds x="202" y="137" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="185" y="180" width="70" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Presenter_di" bpmnElement="Task_Presenter">
+        <dc:Bounds x="280" y="115" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Cotisation_di" bpmnElement="Task_Cotisation">
+        <dc:Bounds x="420" y="280" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Cotisation_di" bpmnElement="GW_Cotisation" isMarkerVisible="true">
+        <dc:Bounds x="570" y="295" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="550" y="255" width="90" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Retard_di" bpmnElement="Task_Retard">
+        <dc:Bounds x="660" y="280" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Retard_di" bpmnElement="GW_Retard" isMarkerVisible="true">
+        <dc:Bounds x="810" y="295" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="790" y="255" width="90" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Compter_di" bpmnElement="Task_Compter">
+        <dc:Bounds x="900" y="280" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Max_di" bpmnElement="GW_Max" isMarkerVisible="true">
+        <dc:Bounds x="1050" y="295" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1025" y="248" width="100" height="40" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Enregistrer_di" bpmnElement="Task_Enregistrer">
+        <dc:Bounds x="1140" y="280" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Valide_di" bpmnElement="End_Valide">
+        <dc:Bounds x="1300" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1282" y="345" width="72" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Refus_di" bpmnElement="GW_Refus" isMarkerVisible="true">
+        <dc:Bounds x="1050" y="420" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Refus_di" bpmnElement="Task_Refus">
+        <dc:Bounds x="1140" y="405" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Refuse_di" bpmnElement="End_Refuse">
+        <dc:Bounds x="1300" y="427" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1280" y="470" width="76" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNEdge id="F1_di" bpmnElement="F1">
+        <di:waypoint x="238" y="155" /><di:waypoint x="280" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F2_di" bpmnElement="F2">
+        <di:waypoint x="390" y="155" /><di:waypoint x="475" y="155" /><di:waypoint x="475" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F3_di" bpmnElement="F3">
+        <di:waypoint x="530" y="320" /><di:waypoint x="570" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F4_Oui_di" bpmnElement="F4_Oui">
+        <di:waypoint x="620" y="320" /><di:waypoint x="660" y="320" />
+        <bpmndi:BPMNLabel><dc:Bounds x="627" y="302" width="20" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F4_Non_di" bpmnElement="F4_Non">
+        <di:waypoint x="595" y="345" /><di:waypoint x="595" y="510" /><di:waypoint x="1075" y="510" /><di:waypoint x="1075" y="470" />
+        <bpmndi:BPMNLabel><dc:Bounds x="602" y="360" width="22" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F5_di" bpmnElement="F5">
+        <di:waypoint x="770" y="320" /><di:waypoint x="810" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F6_Non_di" bpmnElement="F6_Non">
+        <di:waypoint x="860" y="320" /><di:waypoint x="900" y="320" />
+        <bpmndi:BPMNLabel><dc:Bounds x="866" y="302" width="22" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F6_Oui_di" bpmnElement="F6_Oui">
+        <di:waypoint x="835" y="345" /><di:waypoint x="835" y="445" /><di:waypoint x="1050" y="445" />
+        <bpmndi:BPMNLabel><dc:Bounds x="842" y="360" width="20" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F7_di" bpmnElement="F7">
+        <di:waypoint x="1010" y="320" /><di:waypoint x="1050" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F8_Oui_di" bpmnElement="F8_Oui">
+        <di:waypoint x="1100" y="320" /><di:waypoint x="1140" y="320" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1106" y="302" width="20" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F8_Non_di" bpmnElement="F8_Non">
+        <di:waypoint x="1075" y="345" /><di:waypoint x="1075" y="420" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1082" y="370" width="70" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F9_di" bpmnElement="F9">
+        <di:waypoint x="1250" y="320" /><di:waypoint x="1300" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F10_di" bpmnElement="F10">
+        <di:waypoint x="1100" y="445" /><di:waypoint x="1140" y="445" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F11_di" bpmnElement="F11">
+        <di:waypoint x="1250" y="445" /><di:waypoint x="1300" y="445" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
